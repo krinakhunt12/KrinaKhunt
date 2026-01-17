@@ -3,55 +3,77 @@ import React, { useEffect, useState, useRef } from 'react';
 
 const About: React.FC = () => {
   const stats = [
-    { label: "Years Experience", value: 6, suffix: "+" },
-    { label: "Projects Completed", value: 40, suffix: "+" },
-    { label: "Tech Stack", value: 15, suffix: "+" },
-    { label: "Happy Clients", value: 25, suffix: "+" }
+    { label: "Years Experience", value: 2, suffix: "+" },
+    { label: "Projects Completed", value: 15, suffix: "+" },
+    { label: "Technologies", value: 12, suffix: "+" },
+    { label: "Open Source", value: 8, suffix: "+" }
   ];
 
   return (
-    <section id="about" className="py-24 px-6" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-      <div className="container max-w-6xl mx-auto max-w-6xl">
+    <section id="about" className="py-24 px-6 overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+      <div className="container max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-20 items-center">
           <div className="reveal relative">
-            <div className="relative z-10 rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border)' }}>
-              <img src="https://picsum.photos/seed/office/800/1000" alt="Workspace" className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700" />
+            <div className="relative z-10 rounded-2xl overflow-hidden border group" style={{ borderColor: 'var(--border)' }}>
+              <img
+                src="/about-image.png"
+                alt="Professional Workspace"
+                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-1000 transform group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </div>
-            <div className="absolute -top-6 -left-6 w-24 h-24 border-t-4 border-l-4" style={{ borderColor: 'var(--accent-1)' }} />
-            <div className="absolute -bottom-6 -right-6 w-24 h-24 border-b-4 border-r-4" style={{ borderColor: 'var(--accent-3)' }} />
+
+            {/* Decorative Elements */}
+            <div className="absolute -top-6 -left-6 w-24 h-24 border-t-2 border-l-2 opacity-30" style={{ borderColor: 'var(--accent-1)' }} />
+            <div className="absolute -bottom-6 -right-6 w-24 h-24 border-b-2 border-r-2 opacity-30" style={{ borderColor: 'var(--accent-3)' }} />
+
+            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-white/5 rounded-full blur-3xl" />
           </div>
 
           <div className="space-y-8 reveal" style={{ transitionDelay: '0.2s' }}>
             <div className="space-y-4">
-              <h3 className="mono text-sm uppercase tracking-widest" style={{ color: 'var(--accent-1)' }}>Background</h3>
-              <h2 className="text-4xl md:text-5xl font-black">Building Digital <br /><span className="gradient-text">Ecosystems</span></h2>
+              <h3 className="mono text-sm uppercase tracking-[0.3em]" style={{ color: 'var(--text-secondary)' }}>01 // Discovery</h3>
+              <h2 className="text-5xl md:text-6xl font-black leading-tight">
+                Architecting <br />
+                <span className="gradient-text italic">Digital Logic.</span>
+              </h2>
             </div>
 
-            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              I am a results-driven developer who thrives on solving complex problems. My journey began with a curiosity for how things work under the hood, leading to a deep mastery of the full stack ecosystem.
-            </p>
+            <div className="space-y-6 text-lg leading-relaxed font-light" style={{ color: 'var(--text-secondary)' }}>
+              <p>
+                I am <span style={{ color: 'var(--accent-1)' }} className="font-semibold">Krina Khunt</span>, a Full Stack Developer and AI enthusiast dedicated to crafting high-performance digital solutions. My approach blends technical precision with creative problem-solving.
+              </p>
 
-            <p className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              From high-performance cloud architectures to pixel-perfect frontends, I bring a holistic approach to digital craftsmanship.
-            </p>
+              <p>
+                From developing computer vision systems for <span className="text-[var(--accent-2)]">Plant Disease Detection</span> to building sophisticated <span className="text-[var(--accent-2)]">E-Commerce Ecosystems</span>, I specialize in bridging the gap between complex backend logic and pixel-perfect user experiences.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-2 gap-6 py-8">
+            <div className="grid grid-cols-2 gap-4 py-8">
               {stats.map((stat, i) => (
-                <div key={i} className="p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-2 interactive group" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}>
-                  <div className="text-3xl font-black flex items-baseline group-hover:scale-110 transition-transform">
-                    <Counter end={stat.value} />
-                    <span style={{ color: 'var(--accent-1)' }}>{stat.suffix}</span>
+                <div key={i} className="p-8 rounded-xl border transition-all duration-500 hover:border-white/40 interactive group relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}>
+                  <div className="relative z-10 transition-transform duration-500 group-hover:translate-x-2">
+                    <div className="text-4xl font-black flex items-baseline">
+                      <Counter end={stat.value} />
+                      <span className="text-sm ml-1 opacity-50">{stat.suffix}</span>
+                    </div>
+                    <div className="text-[10px] uppercase tracking-widest font-bold mt-2 opacity-50" style={{ color: 'var(--text-secondary)' }}>{stat.label}</div>
                   </div>
-                  <div className="text-[10px] uppercase tracking-widest font-bold mt-1" style={{ color: 'var(--text-secondary)' }}>{stat.label}</div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl transition-all duration-500 group-hover:scale-150" />
                 </div>
               ))}
             </div>
 
-            <button className="flex items-center gap-4 group interactive">
-              <span className="w-14 h-14 rounded-full border flex items-center justify-center transition-all duration-300 group-hover:bg-[var(--accent-1)]" style={{ borderColor: 'var(--accent-1)' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-black transition-colors"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              </span>
-              <span className="text-sm font-bold uppercase tracking-widest">Download CV</span>
+            <button className="flex items-center gap-6 group interactive">
+              <div className="relative">
+                <span className="w-16 h-16 rounded-full border flex items-center justify-center transition-all duration-500 group-hover:bg-white group-hover:border-white" style={{ borderColor: 'var(--accent-3)' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-black transition-colors transform group-hover:translate-y-1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                </span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xs mono uppercase tracking-widest opacity-50">Curriculum Vitae</span>
+                <span className="text-sm font-bold uppercase tracking-[0.2em] group-hover:tracking-[0.3em] transition-all">Download CV</span>
+              </div>
             </button>
           </div>
         </div>
