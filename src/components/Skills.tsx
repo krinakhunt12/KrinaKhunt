@@ -1,9 +1,10 @@
 
 import React from 'react';
+import type { Skill } from '../types';
 import { SKILLS } from '../constants';
 
 const Skills: React.FC = () => {
-  const categories = ["Frontend", "Backend", "Database", "Tools & DevOps"];
+  const categories: Skill['category'][] = ["Frontend", "Backend", "Database", "Tools & DevOps"];
 
   return (
     <section id="skills" className="py-24 px-6 relative overflow-hidden">
@@ -32,7 +33,7 @@ const Skills: React.FC = () => {
 
               {/* Skills Grid for this category */}
               <div className="grid grid-cols-2 gap-4">
-                {SKILLS.filter(s => s.category === cat).map((skill, idx) => (
+                {SKILLS.filter((s: Skill) => s.category === cat).map((skill: Skill, idx: number) => (
                   <div
                     key={skill.name}
                     className="p-5 rounded-2xl border border-white/5 bg-white/5 transition-all duration-300 hover:scale-105 hover:bg-white/[0.08] interactive group/item"
@@ -41,7 +42,7 @@ const Skills: React.FC = () => {
                       <div className="flex justify-between items-start">
                         <span className="font-bold text-sm">{skill.name}</span>
                         <div className="flex gap-1">
-                          {[1, 2, 3, 4, 5].map(dot => (
+                          {[1, 2, 3, 4, 5].map((dot: number) => (
                             <div
                               key={dot}
                               className={`w-1 h-1 rounded-full transition-all duration-500 ${skill.level / 20 >= dot ? 'bg-[var(--accent-1)] scale-125 shadow-[0_0_5px_var(--accent-1)]' : 'bg-white/10'}`}
