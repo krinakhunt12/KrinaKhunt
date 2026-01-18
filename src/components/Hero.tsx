@@ -150,26 +150,7 @@ const Hero: React.FC = () => {
           <div className="absolute -top-20 -right-20 w-64 h-64 blur-[120px] opacity-20 bg-[var(--accent-1)] animate-pulse-slow" />
           <div className="absolute -bottom-20 -left-20 w-72 h-72 blur-[150px] opacity-10 bg-[var(--accent-3)] animate-pulse-slow" style={{ animationDelay: '2s' }} />
         </div>
-
       </div>
-
-      {/* Smooth Scroll Arrow Button */}
-      <a
-        href="#about"
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce flex flex-col items-center gap-3 interactive group cursor-pointer"
-        aria-label="Scroll to About"
-      >
-        <span className="text-[10px] uppercase font-black tracking-[0.3em] opacity-30 group-hover:opacity-100 transition-all transform group-hover:-translate-y-1">Discover</span>
-        <div
-          className="w-12 h-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 transform group-hover:scale-110 active:scale-95"
-          style={{ backgroundColor: 'var(--accent-1)', color: 'var(--bg-primary)' }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="7 13 12 18 17 13"></polyline>
-            <polyline points="7 6 12 11 17 6"></polyline>
-          </svg>
-        </div>
-      </a>
     </section>
   );
 };

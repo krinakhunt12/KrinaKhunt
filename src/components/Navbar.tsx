@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import ThemeToggle from './ThemeToggle';
-import { useTheme } from '../hooks/useTheme';
 
 interface NavbarProps {
   activeSection: string;
@@ -9,7 +8,6 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -27,9 +25,9 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'py-3 shadow-2xl glass' : 'py-6 bg-transparent'}`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-400 ease-in-out ${isScrolled ? 'py-3 shadow-2xl glass' : 'py-6 bg-transparent'}`}
       style={{
-        backgroundColor: isScrolled ? (theme === 'dark' ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.9)') : 'transparent',
+        backgroundColor: isScrolled ? 'var(--nav-bg)' : 'transparent',
         borderBottom: isScrolled ? '1px solid var(--border)' : 'none'
       }}
     >

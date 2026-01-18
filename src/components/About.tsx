@@ -1,12 +1,13 @@
 
 import React, { useEffect, useState, useRef } from 'react';
+import { FiDownload } from "react-icons/fi";
 
 const About: React.FC = () => {
   const stats = [
-    { label: "Years Experience", value: 2, suffix: "+" },
-    { label: "Projects Completed", value: 15, suffix: "+" },
-    { label: "Technologies", value: 12, suffix: "+" },
-    { label: "Open Source", value: 8, suffix: "+" }
+    { label: "Years Experience", value: 1, suffix: "+" },
+    { label: "Projects Completed", value: 6, suffix: "+" },
+    { label: "Technologies", value: 6, suffix: "+" },
+    { label: "GitHub Repos", value: 12, suffix: "+" }
   ];
 
   return (
@@ -64,10 +65,29 @@ const About: React.FC = () => {
               ))}
             </div>
 
-            <button className="flex items-center gap-6 group interactive">
+            <button 
+              className="flex items-center gap-6 group interactive"
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/Krina-Khunt-CV.pdf';
+                link.download = 'Krina-Khunt-CV.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+            >
               <div className="relative">
-                <span className="w-16 h-16 rounded-full border flex items-center justify-center transition-all duration-500 group-hover:bg-white group-hover:border-white" style={{ borderColor: 'var(--accent-3)' }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-black transition-colors transform group-hover:translate-y-1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span
+                  className="w-16 h-16 rounded-full border flex items-center justify-center transition-all duration-500 
+             group-hover:bg-white group-hover:border-white cursor-pointer"
+                  style={{ borderColor: "var(--accent-3)" }}
+                >
+                  <FiDownload
+                    size={24}
+                    className="transition-all duration-500 
+               group-hover:text-black 
+               transform"
+                  />
                 </span>
               </div>
               <div className="flex flex-col">

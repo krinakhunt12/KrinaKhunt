@@ -34,14 +34,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             ripple.style.setProperty('--ripple-y', `${e.clientY}px`);
             ripple.classList.add('active');
             setTimeout(() => {
-                setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
-            }, 300);
-            setTimeout(() => {
                 ripple.classList.remove('active');
-            }, 600);
-        } else {
-            setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+            }, 800);
         }
+        // Change theme immediately without delay
+        setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
     };
 
     return (

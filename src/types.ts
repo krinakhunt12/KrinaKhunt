@@ -5,7 +5,7 @@ export interface Project {
   description: string;
   image: string;
   tech: string[];
-  category: 'frontend' | 'backend' | 'fullstack';
+  category: 'frontend' | 'backend' | 'fullstack' | 'ml';
   liveUrl: string;
   githubUrl: string;
 }
@@ -13,6 +13,6 @@ export interface Project {
 export interface Skill {
   name: string;
   level: number;
-  category: 'Frontend' | 'Backend' | 'Database' | 'Tools & DevOps';
+  category: 'Frontend' | 'Backend' | 'Database' | 'Tools & DevOps' | 'Design';
   icon: string;
 }

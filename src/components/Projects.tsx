@@ -15,7 +15,7 @@ const Projects: React.FC = () => {
             <h2 className="text-4xl md:text-5xl font-black">Featured <span className="gradient-text">Creations</span></h2>
           </div>
           <div className="flex flex-wrap gap-2">
-            {['all', 'frontend', 'backend', 'fullstack'].map(cat => (
+            {['all', 'frontend', 'backend', 'fullstack', 'ml'].map(cat => (
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
@@ -26,7 +26,7 @@ const Projects: React.FC = () => {
                   border: `1px solid ${filter === cat ? 'var(--accent-1)' : 'var(--border)'}`
                 }}
               >
-                {cat}
+                {cat === 'ml' ? 'Machine Learning' : cat}
               </button>
             ))}
           </div>

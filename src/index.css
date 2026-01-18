@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+* {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 :root {
   /* Dark Theme (Default) */
   --bg-primary: #000000;
@@ -11,6 +17,7 @@
   --text-secondary: #A3A3A3;
   --highlight: #D4D4D4;
   --border: rgba(229, 229, 229, 0.1);
+  --nav-bg: rgba(0, 0, 0, 0.85);
 }
 
 [data-theme="light"] {
@@ -23,14 +30,14 @@
   --text-secondary: #5C5C5C;
   --highlight: #2B2B2B;
   --border: rgba(26, 26, 26, 0.1);
+  --nav-bg: rgba(255, 255, 255, 0.9);
 }
 
 body {
   font-family: 'Inter', sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  cursor: none;
-  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   overflow-x: hidden;
 }
 
@@ -149,13 +156,14 @@ body {
   transform: translate(-50%, -50%) scale(0);
   z-index: 9999;
   pointer-events: none;
-  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-  opacity: 0.1;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  will-change: transform, opacity;
 }
 
 .ripple.active {
-  transform: translate(-50%, -50%) scale(2500);
-  opacity: 0;
+  transform: translate(-50%, -50%) scale(5000);
+  opacity: 0.15;
 }
 
 /* Interactive cursor blend modes */

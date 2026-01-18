@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { ThemeProvider } from './hooks/useTheme';
 import Preloader from './components/Preloader';
-import CustomCursor from './components/CustomCursor';
 import Background from './components/Background';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -57,8 +56,8 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider>
-      <div className={`relative min-h-screen transition-colors duration-500`} style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-        <CustomCursor />
+      <div id="theme-ripple" className="ripple" />
+      <div className={`relative min-h-screen transition-all duration-400 ease-in-out`} style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
         <Background />
         <Navbar activeSection={activeSection} />
 

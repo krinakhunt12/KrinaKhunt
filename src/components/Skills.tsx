@@ -4,7 +4,7 @@ import type { Skill } from '../types';
 import { SKILLS } from '../constants';
 
 const Skills: React.FC = () => {
-  const categories: Skill['category'][] = ["Frontend", "Backend", "Database", "Tools & DevOps"];
+  const categories: Skill['category'][] = ["Frontend", "Backend", "Database", "Tools & DevOps", "Design"];
 
   return (
     <section id="skills" className="py-24 px-6 relative overflow-hidden">
