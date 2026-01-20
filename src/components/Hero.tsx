@@ -106,7 +106,7 @@ const Hero: React.FC = () => {
                 {/* Profile Image */}
                 <div className="absolute inset-0">
                   <img
-                    src="/Girl.jpg"
+                    src="/girl.png"
                     alt="Krina Khunt - Full Stack Developer"
                     className="w-full h-full object-cover"
                   />

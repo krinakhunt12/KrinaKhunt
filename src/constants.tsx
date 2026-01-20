@@ -26,8 +26,8 @@ export const PROJECTS: Project[] = [
     title: "E-Commerce Website",
     description: "A modern full-stack e-commerce platform featuring dynamic product management, shopping cart, user authentication, and secure checkout with a responsive UI.",
     image: "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800",
-    tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Node.js", "Express", "MongoDB"],
-    category: "frontend",
+    tech: ["React", "JavaScript", "Tailwind CSS", "Framer Motion", "Node.js", "Express", "MongoDB"],
+    category: "fullstack",
     liveUrl: "https://github.com/krinakhunt12",
     githubUrl: "https://github.com/krinakhunt12"
   },
@@ -47,7 +47,7 @@ export const PROJECTS: Project[] = [
     description: "An intelligent computer vision system that detects plant diseases using deep learning, helping farmers identify issues quickly and accurately.",
     image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&q=80&w=800",
     tech: ["Python", "TensorFlow", "Keras", "OpenCV"],
-    category: "fullstack",
+    category: "ml",
     liveUrl: "https://github.com/krinakhunt12",
     githubUrl: "https://github.com/krinakhunt12"
   },
@@ -70,6 +70,26 @@ export const PROJECTS: Project[] = [
     category: "fullstack",
     liveUrl: "https://pdf-merge-livid.vercel.app/",
     githubUrl: "https://github.com/krinakhunt12"
+  },
+  {
+    id: 8,
+    title: "Code Comment Quality Checker",
+    description: "An AI-powered tool that analyzes code comments for quality, clarity, and completeness. Helps developers maintain clean, well-documented codebases with intelligent feedback.",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=800",
+    tech: ["React.js", "TypeScript", "Tailwind", "Python"],
+    category: "fullstack",
+    liveUrl: "https://pdf-merge-livid.vercel.app/",
+    githubUrl: "https://github.com/krinakhunt12/CommentIQ.git"
+  },
+  {
+    id: 9,
+    title: "HiveHR",
+    description: "A comprehensive HR management system built with React and Supabase, streamlining employee management, attendance tracking, and organizational workflows.",
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800",
+    tech: ["React.js", "TypeScript", "Tailwind", "Supabase"],
+    category: "fullstack",
+    liveUrl: "https://pdf-merge-livid.vercel.app/",
+    githubUrl: "https://github.com/krinakhunt12/HiveHR.git"
   }
 ];
 
