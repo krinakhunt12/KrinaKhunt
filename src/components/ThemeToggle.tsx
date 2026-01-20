@@ -4,24 +4,76 @@ import { useTheme } from '../hooks/useTheme';
 
 const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const isDark = theme === 'dark';
 
   return (
-    <button 
+    <button
+      type="button"
       onClick={toggleTheme}
-      className="relative w-[60px] h-[30px] rounded-full border-2 transition-all duration-300 interactive overflow-hidden"
-      style={{ borderColor: 'var(--accent-3)', backgroundColor: 'var(--bg-secondary)' }}
-      aria-label="Toggle Theme"
+      aria-label="Toggle theme"
+      aria-pressed={!isDark}
+      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border text-sm font-medium select-none"
+      style={{
+        backgroundColor: 'var(--bg-secondary)',
+        borderColor: 'var(--border)',
+        color: 'var(--text-primary)',
+        boxShadow: 'none',
+      }}
     >
-      <div 
-        className={`absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-500 ease-in-out ${theme === 'dark' ? 'left-[34px]' : 'left-[4px]'}`}
-        style={{ backgroundColor: 'var(--accent-1)' }}
-      >
-        {theme === 'dark' ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-black transition-transform duration-300 rotate-180"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      {/* Icon */}
+      <span aria-hidden="true" className="flex items-center justify-center">
+        {isDark ? (
+          // Moon icon
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 0 1 11.21 3 7 7 0 1 0 21 12.79z" />
+          </svg>
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white transition-transform duration-300"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          // Sun icon
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <line x1="12" y1="2" x2="12" y2="4" />
+            <line x1="12" y1="20" x2="12" y2="22" />
+            <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" />
+            <line x1="17.66" y1="17.66" x2="19.07" y2="19.07" />
+            <line x1="2" y1="12" x2="4" y2="12" />
+            <line x1="20" y1="12" x2="22" y2="12" />
+            <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" />
+            <line x1="17.66" y1="6.34" x2="19.07" y2="4.93" />
+          </svg>
         )}
-      </div>
+      </span>
+      <span className="mono" style={{ color: 'var(--text-secondary)' }}>Theme</span>
+      <span
+        className="mono"
+        style={{
+          color: 'var(--text-primary)',
+          textDecoration: 'underline',
+          textDecorationColor: 'var(--accent-3)',
+          textUnderlineOffset: '3px',
+        }}
+      >
+        {isDark ? 'Dark' : 'Light'}
+      </span>
     </button>
   );
 };

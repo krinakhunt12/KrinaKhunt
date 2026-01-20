@@ -37,30 +37,33 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 px-6 relative overflow-hidden">
-      <div className="container max-w-6xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+    <section id="contact" className="py-20 px-4 md:px-6 relative overflow-hidden">
+      <div className="container max-w-6xl mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
           {/* Left Column: Let's Connect Info */}
-          <div className="space-y-10 reveal">
-            <div className="space-y-4">
-              <h3 className="mono text-xs uppercase tracking-[0.4em] font-black" style={{ color: 'var(--accent-1)' }}>Get in Touch</h3>
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter">LET'S <br /><span className="gradient-text">CONNECT</span></h2>
-              <p className="text-lg max-w-sm opacity-60 leading-relaxed">
+          <div className="space-y-8 md:space-y-10">
+            <div className="space-y-3 md:space-y-4">
+              <h3 className="mono text-[10px] md:text-xs uppercase tracking-[0.4em] font-black" style={{ color: 'var(--accent-1)' }}>Get in Touch</h3>
+              <h2 className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-tight">
+                LET'S <br /><span style={{ color: 'var(--accent-1)' }}>CONNECT</span>
+              </h2>
+              <p className="text-sm md:text-lg max-w-md opacity-60 leading-relaxed">
                 Currently building innovative solutions at Codesmiths Technologies Pvt Ltd. Let's discuss your next big idea.
               </p>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               {contactDetails.map((item, idx) => (
                 <a
                   key={idx}
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-5 group interactive p-3 rounded-2xl transition-all duration-300 hover:bg-white/5 border border-transparent hover:border-white/10"
+                  className="flex items-center gap-5 group interactive p-3 rounded-2xl border hover:underline"
+                  style={{ borderColor: 'var(--border)' }}
                 >
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
                     <div style={{ color: 'var(--accent-1)' }}>{item.icon}</div>
                   </div>
                   <div>
@@ -73,16 +76,16 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className="reveal" style={{ transitionDelay: '0.2s' }}>
-            <div className="p-8 md:p-12 rounded-[3rem] border relative overflow-hidden shadow-2xl" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)' }}>
+          <div>
+            <div className="p-8 md:p-12 rounded-[3rem] border relative overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)' }}>
               {isSent && (
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-8 space-y-4 animate-[fadeIn_0.5s_ease-out]" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-8 space-y-4" style={{ backgroundColor: 'var(--bg-secondary)' }}>
                   <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--accent-1)' }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-black"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </div>
                   <h4 className="text-xl font-black">Transmission Sent!</h4>
                   <p className="opacity-60 text-sm">Thank you for identifying yourself. Krina Khunt will reach out soon.</p>
-                  <button onClick={() => setIsSent(false)} className="mt-4 text-xs font-black uppercase tracking-widest border-b border-white/20 pb-1 hover:border-white transition-all">Send another</button>
+                  <button onClick={() => setIsSent(false)} className="mt-4 text-xs font-black uppercase tracking-widest border-b pb-1 hover:underline" style={{ borderColor: 'var(--border)' }}>Send another</button>
                 </div>
               )}
 
@@ -90,29 +93,29 @@ const Contact: React.FC = () => {
                 <div className="space-y-8">
                   <div className="relative group">
                     <label className="block text-[10px] uppercase tracking-[0.2em] font-black opacity-50 mb-1">Identify Yourself</label>
-                    <input type="text" required className="w-full bg-transparent border-b border-white/10 py-2 outline-none transition-all duration-300 focus:border-[var(--accent-1)] interactive" />
+                    <input type="text" required className="w-full bg-transparent border-b py-2 outline-none interactive" style={{ borderColor: 'var(--border)' }} />
                   </div>
 
                   <div className="relative group">
                     <label className="block text-[10px] uppercase tracking-[0.2em] font-black opacity-50 mb-1">Email Frequency</label>
-                    <input type="email" required className="w-full bg-transparent border-b border-white/10 py-2 outline-none transition-all duration-300 focus:border-[var(--accent-1)] interactive" />
+                    <input type="email" required className="w-full bg-transparent border-b py-2 outline-none interactive" style={{ borderColor: 'var(--border)' }} />
                   </div>
 
                   <div className="relative group">
                     <label className="block text-[10px] uppercase tracking-[0.2em] font-black opacity-50 mb-1">Transmission Details</label>
-                    <textarea required rows={4} className="w-full bg-transparent border-b border-white/10 py-2 outline-none transition-all duration-300 focus:border-[var(--accent-1)] resize-none interactive"></textarea>
+                    <textarea required rows={4} className="w-full bg-transparent border-b py-2 outline-none resize-none interactive" style={{ borderColor: 'var(--border)' }}></textarea>
                   </div>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 rounded-xl font-black uppercase tracking-[0.3em] text-[11px] transition-all duration-500 interactive group flex items-center justify-center gap-3"
+                  className="w-full py-4 rounded-xl font-black uppercase tracking-[0.3em] text-[11px] interactive group flex items-center justify-center gap-3 hover:underline"
                   style={{ backgroundColor: 'var(--accent-1)', color: 'var(--bg-primary)' }}
                 >
                   <span>{isSubmitting ? 'Transmitting...' : 'Send Signal'}</span>
                   {!isSubmitting && (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                   )}
                 </button>
               </form>

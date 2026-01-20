@@ -1,11 +1,12 @@
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 
 type Theme = 'dark' | 'light';
 
 interface ThemeContextType {
     theme: Theme;
-    toggleTheme: (e: React.MouseEvent) => void;
+    toggleTheme: () => void;
+    setTheme: (theme: Theme) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -18,31 +19,36 @@ export const useTheme = () => {
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [theme, setTheme] = useState<Theme>(() => {
+        // Prefer whatever was applied pre-paint in `index.html`, then localStorage.
+        const attr = document.documentElement.getAttribute('data-theme');
+        if (attr === 'light' || attr === 'dark') return attr;
         const saved = localStorage.getItem('theme');
-        return (saved as Theme) || 'dark';
+        return (saved === 'light' || saved === 'dark') ? saved : 'dark';
     });
 
-    useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-    }, [theme]);
-
-    const toggleTheme = (e: React.MouseEvent) => {
-        const ripple = document.getElementById('theme-ripple');
-        if (ripple) {
-            ripple.style.setProperty('--ripple-x', `${e.clientX}px`);
-            ripple.style.setProperty('--ripple-y', `${e.clientY}px`);
-            ripple.classList.add('active');
-            setTimeout(() => {
-                ripple.classList.remove('active');
-            }, 800);
+    const applyTheme = (next: Theme) => {
+        // Apply synchronously (no post-paint effect) to avoid flicker/lag.
+        document.documentElement.setAttribute('data-theme', next);
+        document.documentElement.style.colorScheme = next;
+        try {
+            localStorage.setItem('theme', next);
+        } catch {
+            // ignore
         }
-        // Change theme immediately without delay
-        setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+        setTheme(next);
     };
 
+    const api = useMemo(() => {
+        return {
+            theme,
+            toggleTheme: () => applyTheme(theme === 'dark' ? 'light' : 'dark'),
+            setTheme: applyTheme,
+        };
+        // `theme` intentionally included; `applyTheme` is stable by closure.
+    }, [theme]);
+
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <ThemeContext.Provider value={api}>
             {children}
         </ThemeContext.Provider>
     );

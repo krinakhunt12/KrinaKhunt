@@ -27,17 +27,6 @@ const App: React.FC = () => {
       return false;
     });
     if (currentSection) setActiveSection(currentSection);
-
-    // Scroll reveal logic
-    const reveals = document.querySelectorAll('.reveal');
-    reveals.forEach(reveal => {
-      const windowHeight = window.innerHeight;
-      const revealTop = reveal.getBoundingClientRect().top;
-      const revealPoint = 100;
-      if (revealTop < windowHeight - revealPoint) {
-        reveal.classList.add('active');
-      }
-    });
   }, []);
 
   useEffect(() => {
@@ -56,8 +45,7 @@ const App: React.FC = () => {
 
   return (
     <ThemeProvider>
-      <div id="theme-ripple" className="ripple" />
-      <div className={`relative min-h-screen transition-all duration-400 ease-in-out`} style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+      <div className="relative min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
         <Background />
         <Navbar activeSection={activeSection} />
 

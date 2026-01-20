@@ -104,24 +104,21 @@ const Chatbot: React.FC = () => {
     <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end">
       {isOpen && (
         <div
-          className="mb-4 w-[92vw] h-[84vh] md:w-[400px] h-[600px] rounded-[2.5rem] flex flex-col overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.5)] border transition-all duration-500 animate-[slideIn_0.4s_cubic-bezier(0.16,1,0.3,1)]"
+          className="mb-4 w-[92vw] h-[84vh] md:w-[400px] h-[600px] rounded-[2.5rem] flex flex-col overflow-hidden border transition-colors duration-180"
           style={{
             backgroundColor: 'var(--bg-secondary)',
             borderColor: 'var(--border)',
-            backdropFilter: 'blur(30px)'
           }}
         >
           {/* Agent Header */}
           <div className="p-6 border-b flex justify-between items-center bg-white/[0.02]" style={{ borderColor: 'var(--border)' }}>
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center relative shadow-lg overflow-hidden group" style={{ backgroundColor: 'var(--accent-1)' }}>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center relative overflow-hidden group" style={{ backgroundColor: 'var(--accent-1)' }}>
                   <span className="text-black font-black text-xs tracking-tighter">AGENT</span>
                   <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent" />
                 </div>
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-[3px] rounded-full" style={{ borderColor: 'var(--bg-secondary)' }}>
-                  <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-75" />
-                </div>
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-[3px] rounded-full" style={{ borderColor: 'var(--bg-secondary)' }} />
               </div>
               <div>
                 <div className="flex items-center gap-2">
@@ -134,7 +131,7 @@ const Chatbot: React.FC = () => {
                 </div>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="opacity-40 hover:opacity-100 transition-all p-2 hover:bg-white/5 rounded-full">
+            <button onClick={() => setIsOpen(false)} className="opacity-40 hover:opacity-100 transition-colors duration-180 p-2 rounded-full hover:underline">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
           </div>
@@ -147,7 +144,7 @@ const Chatbot: React.FC = () => {
                   {msg.role === 'user' ? 'Client Request' : 'Agent Response'}
                 </div>
                 <div
-                  className={`max-w-[85%] p-4 rounded-2xl text-[12px] shadow-sm ${msg.role === 'user'
+                  className={`max-w-[85%] p-4 rounded-2xl text-[12px] ${msg.role === 'user'
                     ? 'bg-white text-black font-bold'
                     : 'bg-white/[0.04] border border-white/10'
                     }`}
@@ -161,9 +158,9 @@ const Chatbot: React.FC = () => {
               <div className="flex flex-col items-start">
                 <div className="text-[8px] uppercase tracking-widest opacity-30 mb-1.5 font-black ml-1">Agent Processing</div>
                 <div className="bg-white/5 px-4 py-3 rounded-2xl border border-white/10 flex gap-1.5 items-center">
-                  <div className="w-1 h-1 bg-[var(--accent-1)] rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
-                  <div className="w-1 h-1 bg-[var(--accent-1)] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-                  <div className="w-1 h-1 bg-[var(--accent-1)] rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
+                  <div className="w-1 h-1 bg-[var(--accent-1)] rounded-full" />
+                  <div className="w-1 h-1 bg-[var(--accent-1)] rounded-full" />
+                  <div className="w-1 h-1 bg-[var(--accent-1)] rounded-full" />
                 </div>
               </div>
             )}
@@ -177,7 +174,8 @@ const Chatbot: React.FC = () => {
                 <button
                   key={tag}
                   onClick={() => handleSend(tag)}
-                  className="whitespace-nowrap px-3 py-1.5 rounded-lg border border-white/10 text-[9px] font-black uppercase tracking-widest hover:border-[var(--accent-1)] hover:text-[var(--accent-1)] transition-all bg-white/5 active:scale-95"
+                  className="whitespace-nowrap px-3 py-1.5 rounded-lg border text-[9px] font-black uppercase tracking-widest hover:underline"
+                  style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-primary)', color: 'var(--text-secondary)' }}
                 >
                   {tag}
                 </button>
@@ -185,7 +183,8 @@ const Chatbot: React.FC = () => {
             </div>
             <form
               onSubmit={(e) => { e.preventDefault(); handleSend(); }}
-              className="flex items-center gap-2 bg-white/5 rounded-2xl border border-white/10 p-1.5 focus-within:border-[var(--accent-1)] transition-all shadow-inner"
+              className="flex items-center gap-2 rounded-2xl border p-1.5"
+              style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-primary)' }}
             >
               <input
                 value={input}
@@ -196,7 +195,7 @@ const Chatbot: React.FC = () => {
               <button
                 type="submit"
                 disabled={!input.trim()}
-                className="w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 disabled:opacity-20 disabled:grayscale"
+                className="w-10 h-10 rounded-xl flex items-center justify-center disabled:opacity-20 disabled:grayscale"
                 style={{ backgroundColor: 'var(--accent-1)', color: 'var(--bg-primary)' }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
@@ -209,20 +208,19 @@ const Chatbot: React.FC = () => {
       {/* Launcher Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-16 h-16 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 hover:rotate-6 active:scale-90 group relative interactive"
+        className="w-16 h-16 rounded-full flex items-center justify-center border transition-colors duration-180 group relative interactive"
         style={{
           backgroundColor: isOpen ? 'var(--bg-secondary)' : 'var(--accent-1)',
           color: isOpen ? 'var(--accent-1)' : 'var(--bg-primary)',
-          boxShadow: '0 20px 50px rgba(0,0,0,0.4)'
+          borderColor: 'var(--border)',
         }}
       >
-        <div className="absolute inset-0 rounded-full animate-ping opacity-20 bg-[var(--accent-1)]" />
         {isOpen ? (
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         ) : (
           <div className="relative">
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-            <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white animate-bounce" />
+            <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white" />
           </div>
         )}
       </button>

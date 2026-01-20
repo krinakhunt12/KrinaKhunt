@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="pt-24 pb-12 px-6 border-t" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}>
-      <div className="container max-w-6xl mx-auto">
+      <div className="container max-w-6xl mx-auto px-6">
         <div className="flex flex-col items-center text-center space-y-12">
 
           {/* Brand/Logo Section */}
@@ -41,7 +41,8 @@ const Footer: React.FC = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 hover:border-[var(--accent-1)] hover:text-[var(--accent-1)] transition-all interactive"
+                className="w-12 h-12 rounded-full border flex items-center justify-center hover:text-[var(--accent-1)] transition-colors duration-180 interactive"
+                style={{ borderColor: 'var(--border)' }}
                 title={link.name}
               >
                 {link.icon}
@@ -60,8 +61,8 @@ const Footer: React.FC = () => {
               className="group flex items-center gap-3 interactive"
             >
               <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40 group-hover:opacity-100 transition-opacity">Back to Top</span>
-              <div className="w-10 h-10 rounded-full border flex items-center justify-center group-hover:bg-[var(--accent-1)] group-hover:border-[var(--accent-1)] transition-all duration-500" style={{ borderColor: 'var(--border)' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-black transition-all"><polyline points="18 15 12 9 6 15"></polyline></svg>
+              <div className="w-10 h-10 rounded-full border flex items-center justify-center transition-colors duration-180" style={{ borderColor: 'var(--border)' }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
               </div>
             </button>
           </div>

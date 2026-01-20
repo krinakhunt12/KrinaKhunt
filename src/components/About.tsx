@@ -12,16 +12,15 @@ const About: React.FC = () => {
 
   return (
     <section id="about" className="py-24 px-6 overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-      <div className="container max-w-6xl mx-auto">
+      <div className="container max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-20 items-center">
-          <div className="reveal relative">
+          <div className="relative">
             <div className="relative z-10 rounded-2xl overflow-hidden border group" style={{ borderColor: 'var(--border)' }}>
               <img
                 src="/about-image.png"
                 alt="Professional Workspace"
-                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-1000 transform group-hover:scale-105"
+                className="w-full h-auto"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             </div>
 
             {/* Decorative Elements */}
@@ -31,12 +30,12 @@ const About: React.FC = () => {
             <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-white/5 rounded-full blur-3xl" />
           </div>
 
-          <div className="space-y-8 reveal" style={{ transitionDelay: '0.2s' }}>
+          <div className="space-y-8">
             <div className="space-y-4">
               <h3 className="mono text-sm uppercase tracking-[0.3em]" style={{ color: 'var(--text-secondary)' }}>01 // Discovery</h3>
               <h2 className="text-5xl md:text-6xl font-black leading-tight">
                 Architecting <br />
-                <span className="gradient-text italic">Digital Logic.</span>
+                <span className="italic" style={{ color: 'var(--accent-1)' }}>Digital Logic.</span>
               </h2>
             </div>
 
@@ -52,21 +51,20 @@ const About: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-4 py-8">
               {stats.map((stat, i) => (
-                <div key={i} className="p-8 rounded-xl border transition-all duration-500 hover:border-white/40 interactive group relative overflow-hidden" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}>
-                  <div className="relative z-10 transition-transform duration-500 group-hover:translate-x-2">
+                <div key={i} className="p-8 rounded-xl border relative" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}>
+                  <div className="relative z-10">
                     <div className="text-4xl font-black flex items-baseline">
                       <Counter end={stat.value} />
                       <span className="text-sm ml-1 opacity-50">{stat.suffix}</span>
                     </div>
                     <div className="text-[10px] uppercase tracking-widest font-bold mt-2 opacity-50" style={{ color: 'var(--text-secondary)' }}>{stat.label}</div>
                   </div>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 blur-2xl transition-all duration-500 group-hover:scale-150" />
                 </div>
               ))}
             </div>
 
-            <button 
-              className="flex items-center gap-6 group interactive"
+            <button
+              className="flex items-center gap-6 group"
               onClick={() => {
                 const link = document.createElement('a');
                 link.href = '/Krina-Khunt-CV.pdf';
@@ -78,21 +76,18 @@ const About: React.FC = () => {
             >
               <div className="relative">
                 <span
-                  className="w-16 h-16 rounded-full border flex items-center justify-center transition-all duration-500 
-             group-hover:bg-white group-hover:border-white cursor-pointer"
+                  className="w-16 h-16 rounded-full border flex items-center justify-center cursor-pointer group-hover:underline"
                   style={{ borderColor: "var(--accent-3)" }}
                 >
                   <FiDownload
                     size={24}
-                    className="transition-all duration-500 
-               group-hover:text-black 
-               transform"
+                    className="group-hover:text-[var(--accent-1)]"
                   />
                 </span>
               </div>
               <div className="flex flex-col">
                 <span className="text-xs mono uppercase tracking-widest opacity-50">Curriculum Vitae</span>
-                <span className="text-sm font-bold uppercase tracking-[0.2em] group-hover:tracking-[0.3em] transition-all">Download CV</span>
+                <span className="text-sm font-bold uppercase tracking-[0.2em] group-hover:underline">Download CV</span>
               </div>
             </button>
           </div>

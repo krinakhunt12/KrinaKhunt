@@ -25,18 +25,18 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-400 ease-in-out ${isScrolled ? 'py-3 shadow-2xl glass' : 'py-6 bg-transparent'}`}
+      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-180 ease-out ${isScrolled ? 'py-3' : 'py-6 bg-transparent'}`}
       style={{
         backgroundColor: isScrolled ? 'var(--nav-bg)' : 'transparent',
         borderBottom: isScrolled ? '1px solid var(--border)' : 'none'
       }}
     >
-      <div className="container max-w-6xl mx-auto px-4 md:px-0 flex items-center justify-between">
+      <div className="container max-w-6xl mx-auto px-6 flex items-center justify-between">
         <div className="flex items-center">
           {/* Brand Name with right margin for breathing room */}
           <a href="#home" className="group interactive flex flex-col items-start min-w-max mr-8 lg:mr-12">
             <span className="text-xl md:text-2xl font-black leading-none tracking-tighter uppercase">Krina</span>
-            <span className="text-[9px] md:text-[10px] font-black tracking-[0.3em] opacity-50 uppercase leading-none mt-1">Khunt</span>
+            <span className="text-xs md:text-sm font-black tracking-[0.3em] opacity-50 uppercase leading-none mt-1">Khunt</span>
           </a>
 
           {/* Vertical Separator - with responsive horizontal margins */}
@@ -48,11 +48,11 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               <a
                 key={link.id}
                 href={link.href}
-                className={`text-[9px] lg:text-[11px] font-black tracking-[0.2em] uppercase transition-all duration-300 interactive relative group ${activeSection === link.id ? 'active' : ''}`}
+                className={`nav-link text-[9px] lg:text-[11px] font-black tracking-[0.2em] uppercase interactive relative group ${activeSection === link.id ? 'active' : ''}`}
                 style={{ color: activeSection === link.id ? 'var(--accent-1)' : 'var(--text-secondary)' }}
               >
                 {link.name}
-                <span className={`absolute -bottom-1 left-0 h-0.5 transition-all duration-300 ${activeSection === link.id ? 'w-full' : 'w-0 group-hover:w-full'}`} style={{ backgroundColor: 'var(--accent-1)' }} />
+                <span className={`absolute -bottom-1 left-0 h-0.5 transition-[width] duration-180 ${activeSection === link.id ? 'w-full' : 'w-0 group-hover:w-full'}`} style={{ backgroundColor: 'var(--accent-1)' }} />
               </a>
             ))}
           </div>
@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
         <div className="flex items-center gap-4">
           <ThemeToggle />
           {/* Hamburger Menu Icon - only visible on mobile (below md) */}
-          <button className="md:hidden interactive p-2 rounded-lg border border-white/10" aria-label="Menu">
+          <button className="md:hidden interactive p-2 rounded-lg border" style={{ borderColor: 'var(--border)' }} aria-label="Menu">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
           </button>
         </div>
