@@ -37,19 +37,19 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 px-4 md:px-6 relative overflow-hidden">
-      <div className="container max-w-6xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+    <section id="contact" className="py-12 md:py-16 lg:py-20 px-4 md:px-6 relative overflow-hidden">
+      <div className="container max-w-6xl mx-auto px-2 md:px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-16 items-start">
 
           {/* Left Column: Let's Connect Info */}
-          <div className="space-y-8 md:space-y-10">
-            <div className="space-y-3 md:space-y-4">
-              <h3 className="mono text-[10px] md:text-xs uppercase tracking-[0.4em] font-black" style={{ color: 'var(--accent-1)' }}>Get in Touch</h3>
-              <h2 className="text-3xl md:text-5xl lg:text-7xl font-black tracking-tighter leading-tight">
+          <div className="space-y-6 md:space-y-8 lg:space-y-10">
+            <div className="space-y-2 md:space-y-3 lg:space-y-4">
+              <h3 className="mono text-[9px] md:text-[10px] lg:text-xs uppercase tracking-[0.4em] font-semibold" style={{ color: 'var(--accent-1)' }}>Get in Touch</h3>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-semibold tracking-tighter leading-tight">
                 LET'S <br /><span style={{ color: 'var(--accent-1)' }}>CONNECT</span>
               </h2>
-              <p className="text-sm md:text-lg max-w-md opacity-60 leading-relaxed">
-                Currently building innovative solutions at Codesmiths Technologies Pvt Ltd. Let's discuss your next big idea.
+              <p className="text-xs md:text-sm lg:text-lg max-w-md opacity-60 leading-relaxed">
+                Where curiosity meets execution and ideas become real. Let's discuss your next big idea.
               </p>
             </div>
 
@@ -60,15 +60,15 @@ const Contact: React.FC = () => {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-5 group interactive p-3 rounded-2xl border hover:underline"
+                  className="flex items-center gap-3 md:gap-5 group interactive p-3 md:p-3 rounded-xl md:rounded-2xl border hover:underline"
                   style={{ borderColor: 'var(--border)' }}
                 >
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
                     <div style={{ color: 'var(--accent-1)' }}>{item.icon}</div>
                   </div>
                   <div>
-                    <div className="text-[9px] uppercase tracking-widest font-black opacity-40 mb-0.5">{item.label}</div>
-                    <div className="text-lg font-bold group-hover:text-[var(--accent-1)] transition-colors">{item.value}</div>
+                    <div className="text-[8px] md:text-[9px] uppercase tracking-widest font-semibold opacity-40 mb-0.5">{item.label}</div>
+                    <div className="text-sm md:text-base lg:text-lg font-bold group-hover:text-[var(--accent-1)] transition-colors">{item.value}</div>
                   </div>
                 </a>
               ))}
@@ -77,40 +77,40 @@ const Contact: React.FC = () => {
 
           {/* Right Column: Contact Form */}
           <div>
-            <div className="p-8 md:p-12 rounded-[3rem] border relative overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)' }}>
+            <div className="p-6 md:p-10 lg:p-12 rounded-2xl md:rounded-[3rem] border relative overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)' }}>
               {isSent && (
                 <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-8 space-y-4" style={{ backgroundColor: 'var(--bg-secondary)' }}>
                   <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--accent-1)' }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-black"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </div>
-                  <h4 className="text-xl font-black">Transmission Sent!</h4>
+                  <h4 className="text-xl font-semibold">Transmission Sent!</h4>
                   <p className="opacity-60 text-sm">Thank you for identifying yourself. Krina Khunt will reach out soon.</p>
-                  <button onClick={() => setIsSent(false)} className="mt-4 text-xs font-black uppercase tracking-widest border-b pb-1 hover:underline" style={{ borderColor: 'var(--border)' }}>Send another</button>
+                  <button onClick={() => setIsSent(false)} className="mt-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest border-b pb-1 hover:underline" style={{ borderColor: 'var(--border)' }}>Send another</button>
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-10">
+              <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8 lg:space-y-10">
                 <div className="space-y-8">
                   <div className="relative group">
-                    <label className="block text-[10px] uppercase tracking-[0.2em] font-black opacity-50 mb-1">Identify Yourself</label>
-                    <input type="text" required className="w-full bg-transparent border-b py-2 outline-none interactive" style={{ borderColor: 'var(--border)' }} />
+                    <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Identify Yourself</label>
+                    <input type="text" required className="w-full bg-transparent border-b py-2 md:py-2 outline-none interactive text-sm md:text-base" style={{ borderColor: 'var(--border)' }} />
                   </div>
 
                   <div className="relative group">
-                    <label className="block text-[10px] uppercase tracking-[0.2em] font-black opacity-50 mb-1">Email Frequency</label>
-                    <input type="email" required className="w-full bg-transparent border-b py-2 outline-none interactive" style={{ borderColor: 'var(--border)' }} />
+                    <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Email Frequency</label>
+                    <input type="email" required className="w-full bg-transparent border-b py-2 md:py-2 outline-none interactive text-sm md:text-base" style={{ borderColor: 'var(--border)' }} />
                   </div>
 
                   <div className="relative group">
-                    <label className="block text-[10px] uppercase tracking-[0.2em] font-black opacity-50 mb-1">Transmission Details</label>
-                    <textarea required rows={4} className="w-full bg-transparent border-b py-2 outline-none resize-none interactive" style={{ borderColor: 'var(--border)' }}></textarea>
+                    <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Transmission Details</label>
+                    <textarea required rows={4} className="w-full bg-transparent border-b py-2 md:py-2 outline-none resize-none interactive text-sm md:text-base" style={{ borderColor: 'var(--border)' }}></textarea>
                   </div>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 rounded-xl font-black uppercase tracking-[0.3em] text-[11px] interactive group flex items-center justify-center gap-3 hover:underline"
+                  className="w-full py-3 md:py-4 rounded-lg md:rounded-xl font-semibold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] interactive group flex items-center justify-center gap-2 md:gap-3 hover:underline"
                   style={{ backgroundColor: 'var(--accent-1)', color: 'var(--bg-primary)' }}
                 >
                   <span>{isSubmitting ? 'Transmitting...' : 'Send Signal'}</span>

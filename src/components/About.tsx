@@ -11,11 +11,11 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-24 px-6 overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-      <div className="container max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-20 items-center">
+    <section id="about" className="py-12 md:py-20 lg:py-24 px-4 md:px-6 overflow-hidden bg-secondary">
+      <div className="container max-w-6xl mx-auto px-2 md:px-6">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
           <div className="relative">
-            <div className="relative z-10 rounded-2xl overflow-hidden border group" style={{ borderColor: 'var(--border)' }}>
+            <div className="relative z-10 rounded-2xl overflow-hidden border group border-border">
               <img
                 src="/about-image.png"
                 alt="Professional Workspace"
@@ -31,17 +31,17 @@ const About: React.FC = () => {
           </div>
 
           <div className="space-y-8">
-            <div className="space-y-4">
-              <h3 className="mono text-sm uppercase tracking-[0.3em]" style={{ color: 'var(--text-secondary)' }}>01 // Discovery</h3>
-              <h2 className="text-5xl md:text-6xl font-black leading-tight">
+            <div className="space-y-3 md:space-y-4">
+              <h3 className="mono text-sm md:text-base uppercase tracking-[0.3em] text-secondary opacity-60">01 // Discovery</h3>
+              <h2 className="text-4xl md:text-5xl font-semibold leading-tight">
                 Architecting <br />
-                <span className="italic" style={{ color: 'var(--accent-1)' }}>Digital Logic.</span>
+                <span className="italic text-accent-1">Digital Logic.</span>
               </h2>
             </div>
 
-            <div className="space-y-6 text-lg leading-relaxed font-light" style={{ color: 'var(--text-secondary)' }}>
+            <div className="space-y-4 md:space-y-6 text-base md:text-lg leading-relaxed font-light text-secondary">
               <p>
-                I am <span style={{ color: 'var(--accent-1)' }} className="font-semibold">Krina Khunt</span>, a Full Stack Developer and AI enthusiast dedicated to crafting high-performance digital solutions. My approach blends technical precision with creative problem-solving.
+                I am <span className="text-accent-1 font-semibold">Krina Khunt</span>, a Full Stack Developer and AI enthusiast dedicated to crafting high-performance digital solutions. My approach blends technical precision with creative problem-solving.
               </p>
 
               <p>
@@ -51,9 +51,9 @@ const About: React.FC = () => {
 
             <div className="grid grid-cols-2 gap-4 py-8">
               {stats.map((stat, i) => (
-                <div key={i} className="p-8 rounded-xl border relative" style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border)' }}>
+                <div key={i} className="px-2 py-4 md:p-8 rounded-xl border relative bg-primary border-border">
                   <div className="relative z-10">
-                    <div className="text-4xl font-black flex items-baseline">
+                    <div className="text-3xl md:text-4xl font-semibold flex items-baseline">
                       <Counter end={stat.value} />
                       <span className="text-sm ml-1 opacity-50">{stat.suffix}</span>
                     </div>
@@ -64,7 +64,7 @@ const About: React.FC = () => {
             </div>
 
             <button
-              className="flex items-center gap-6 group"
+              className="flex items-center gap-4 md:gap-6 group"
               onClick={() => {
                 const link = document.createElement('a');
                 link.href = '/Krina-Khunt-CV.pdf';
@@ -76,18 +76,17 @@ const About: React.FC = () => {
             >
               <div className="relative">
                 <span
-                  className="w-16 h-16 rounded-full border flex items-center justify-center cursor-pointer group-hover:underline"
-                  style={{ borderColor: "var(--accent-3)" }}
+                  className="w-14 h-14 md:w-16 md:h-16 rounded-full border flex items-center justify-center cursor-pointer group-hover:underline border-accent-3"
                 >
                   <FiDownload
-                    size={24}
-                    className="group-hover:text-[var(--accent-1)]"
+                    size={20}
+                    className="md:w-6 md:h-6 group-hover:text-[var(--accent-1)]"
                   />
                 </span>
               </div>
               <div className="flex flex-col">
-                <span className="text-xs mono uppercase tracking-widest opacity-50">Curriculum Vitae</span>
-                <span className="text-sm font-bold uppercase tracking-[0.2em] group-hover:underline">Download CV</span>
+                <span className="text-[10px] md:text-xs mono uppercase tracking-widest opacity-50">Curriculum Vitae</span>
+                <span className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] group-hover:underline">Download CV</span>
               </div>
             </button>
           </div>

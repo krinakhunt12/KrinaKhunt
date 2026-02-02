@@ -29,14 +29,14 @@ const Chatbot: React.FC = () => {
       const parts = line.split(/(\*\*.*?\*\*)/g);
       const renderedLine = parts.map((part, j) => {
         if (part.startsWith('**') && part.endsWith('**')) {
-          return <strong key={j} className="font-black text-[var(--accent-1)]">{part.slice(2, -2)}</strong>;
+          return <strong key={j} className="font-semibold text-[var(--accent-1)]">{part.slice(2, -2)}</strong>;
         }
         return part;
       });
 
       if (line.startsWith('###')) {
         return (
-          <div key={i} className="mt-4 mb-2 text-[10px] font-black uppercase tracking-widest text-[var(--accent-1)] border-b border-white/10 pb-1">
+          <div key={i} className="mt-4 mb-2 text-[10px] font-semibold uppercase tracking-widest text-[var(--accent-1)] border-b border-white/10 pb-1">
             {renderedLine.join('').replace(/^###\s*/, '')}
           </div>
         );
@@ -104,7 +104,7 @@ const Chatbot: React.FC = () => {
     <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end">
       {isOpen && (
         <div
-          className="mb-4 w-[92vw] h-[84vh] md:w-[400px] h-[600px] rounded-[2.5rem] flex flex-col overflow-hidden border transition-colors duration-180"
+          className="mb-4 w-[92vw] h-[84vh] md:w-[400px] md:h-[600px] rounded-[2.5rem] flex flex-col overflow-hidden border transition-colors duration-180"
           style={{
             backgroundColor: 'var(--bg-secondary)',
             borderColor: 'var(--border)',
@@ -115,15 +115,15 @@ const Chatbot: React.FC = () => {
             <div className="flex items-center gap-4">
               <div className="relative">
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center relative overflow-hidden group" style={{ backgroundColor: 'var(--accent-1)' }}>
-                  <span className="text-black font-black text-xs tracking-tighter">AGENT</span>
+                  <span className="text-black font-semibold text-xs tracking-tighter">AGENT</span>
                   <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent" />
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-[3px] rounded-full" style={{ borderColor: 'var(--bg-secondary)' }} />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <div className="text-[13px] font-black uppercase tracking-wider">Aether Agent</div>
-                  <div className="px-1.5 py-0.5 rounded bg-[var(--accent-1)]/10 text-[8px] font-black text-[var(--accent-1)] border border-[var(--accent-1)]/20 tracking-widest">VERIFIED</div>
+                  <div className="text-[13px] font-semibold uppercase tracking-wider">Aether Agent</div>
+                  <div className="px-1.5 py-0.5 rounded bg-[var(--accent-1)]/10 text-[8px] font-semibold text-[var(--accent-1)] border border-[var(--accent-1)]/20 tracking-widest">VERIFIED</div>
                 </div>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
@@ -140,7 +140,7 @@ const Chatbot: React.FC = () => {
           <div className="flex-1 overflow-y-auto p-6 space-y-6 scroll-smooth custom-scrollbar bg-gradient-to-b from-transparent to-black/20">
             {messages.map((msg, i) => (
               <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
-                <div className={`text-[8px] uppercase tracking-[0.2em] opacity-30 mb-1.5 font-black ${msg.role === 'user' ? 'mr-1' : 'ml-1'}`}>
+                <div className={`text-[8px] uppercase tracking-[0.2em] opacity-30 mb-1.5 font-semibold ${msg.role === 'user' ? 'mr-1' : 'ml-1'}`}>
                   {msg.role === 'user' ? 'Client Request' : 'Agent Response'}
                 </div>
                 <div
@@ -156,7 +156,7 @@ const Chatbot: React.FC = () => {
             ))}
             {isTyping && (
               <div className="flex flex-col items-start">
-                <div className="text-[8px] uppercase tracking-widest opacity-30 mb-1.5 font-black ml-1">Agent Processing</div>
+                <div className="text-[8px] uppercase tracking-widest opacity-30 mb-1.5 font-semibold ml-1">Agent Processing</div>
                 <div className="bg-white/5 px-4 py-3 rounded-2xl border border-white/10 flex gap-1.5 items-center">
                   <div className="w-1 h-1 bg-[var(--accent-1)] rounded-full" />
                   <div className="w-1 h-1 bg-[var(--accent-1)] rounded-full" />
@@ -174,7 +174,7 @@ const Chatbot: React.FC = () => {
                 <button
                   key={tag}
                   onClick={() => handleSend(tag)}
-                  className="whitespace-nowrap px-3 py-1.5 rounded-lg border text-[9px] font-black uppercase tracking-widest hover:underline"
+                  className="whitespace-nowrap px-3 py-1.5 rounded-lg border text-[9px] font-semibold uppercase tracking-widest hover:underline"
                   style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-primary)', color: 'var(--text-secondary)' }}
                 >
                   {tag}
