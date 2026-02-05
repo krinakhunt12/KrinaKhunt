@@ -5,14 +5,38 @@ const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", import.meta.env.VITE_CONTACT_KEY);
+    formData.append("subject", "New Portfolio Inquiry");
+    formData.append("from_name", "Portfolio Contact Form");
+
+    try {
+      const response = await fetch(import.meta.env.VITE_CONTACT_API, {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSent(true);
+        setTimeout(() => setIsSent(false), 5000);
+        (e.target as HTMLFormElement).reset();
+      } else {
+        console.error("Error submitting form", data);
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+      alert("Something went wrong. Please try again.");
+    } finally {
       setIsSubmitting(false);
-      setIsSent(true);
-      setTimeout(() => setIsSent(false), 5000);
-    }, 2000);
+    }
   };
 
   const contactDetails = [
@@ -25,7 +49,7 @@ const Contact: React.FC = () => {
     {
       label: 'LinkedIn',
       value: 'Krina Khunt',
-      url: 'https://www.linkedin.com/in/krina-khunt-232732267',
+      url: 'https://www.linkedin.com/in/krinakhunt',
       icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
     },
     {
@@ -44,9 +68,9 @@ const Contact: React.FC = () => {
           {/* Left Column: Let's Connect Info */}
           <div className="space-y-6 md:space-y-8 lg:space-y-10">
             <div className="space-y-2 md:space-y-3 lg:space-y-4">
-              <h3 className="mono text-[9px] md:text-[10px] lg:text-xs uppercase tracking-[0.4em] font-semibold" style={{ color: 'var(--accent-1)' }}>Get in Touch</h3>
+              <h3 className="mono text-[9px] md:text-[10px] lg:text-xs uppercase tracking-[0.4em] font-semibold text-accent-1">Get in Touch</h3>
               <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-semibold tracking-tighter leading-tight">
-                LET'S <br /><span style={{ color: 'var(--accent-1)' }}>CONNECT</span>
+                LET'S <br /><span className="text-accent-1">CONNECT</span>
               </h2>
               <p className="text-xs md:text-sm lg:text-lg max-w-md opacity-60 leading-relaxed">
                 Where curiosity meets execution and ideas become real. Let's discuss your next big idea.
@@ -60,15 +84,14 @@ const Contact: React.FC = () => {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 md:gap-5 group interactive p-3 md:p-3 rounded-xl md:rounded-2xl border hover:underline"
-                  style={{ borderColor: 'var(--border)' }}
+                  className="flex items-center gap-3 md:gap-5 group interactive p-3 md:p-3 rounded-xl md:rounded-2xl border border-border hover:underline"
                 >
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
-                    <div style={{ color: 'var(--accent-1)' }}>{item.icon}</div>
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl flex items-center justify-center bg-bg-secondary border border-border">
+                    <div className="text-accent-1">{item.icon}</div>
                   </div>
                   <div>
                     <div className="text-[8px] md:text-[9px] uppercase tracking-widest font-semibold opacity-40 mb-0.5">{item.label}</div>
-                    <div className="text-sm md:text-base lg:text-lg font-bold group-hover:text-[var(--accent-1)] transition-colors">{item.value}</div>
+                    <div className="text-sm md:text-base lg:text-lg font-bold group-hover:text-accent-1 transition-colors">{item.value}</div>
                   </div>
                 </a>
               ))}
@@ -77,15 +100,15 @@ const Contact: React.FC = () => {
 
           {/* Right Column: Contact Form */}
           <div>
-            <div className="p-6 md:p-10 lg:p-12 rounded-2xl md:rounded-[3rem] border relative overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)', borderColor: 'var(--border)' }}>
+            <div className="p-6 md:p-10 lg:p-12 rounded-2xl md:rounded-[3rem] border border-border bg-bg-secondary relative overflow-hidden">
               {isSent && (
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-8 space-y-4" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-                  <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--accent-1)' }}>
+                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-8 space-y-4 bg-bg-secondary">
+                  <div className="w-20 h-20 rounded-full flex items-center justify-center bg-accent-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-black"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </div>
                   <h4 className="text-xl font-semibold">Transmission Sent!</h4>
                   <p className="opacity-60 text-sm">Thank you for identifying yourself. Krina Khunt will reach out soon.</p>
-                  <button onClick={() => setIsSent(false)} className="mt-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest border-b pb-1 hover:underline" style={{ borderColor: 'var(--border)' }}>Send another</button>
+                  <button onClick={() => setIsSent(false)} className="mt-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest border-b border-border pb-1 hover:underline">Send another</button>
                 </div>
               )}
 
@@ -93,25 +116,24 @@ const Contact: React.FC = () => {
                 <div className="space-y-8">
                   <div className="relative group">
                     <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Identify Yourself</label>
-                    <input type="text" required className="w-full bg-transparent border-b py-2 md:py-2 outline-none interactive text-sm md:text-base" style={{ borderColor: 'var(--border)' }} />
+                    <input type="text" name="Full Name" required className="w-full bg-transparent border-b border-border py-2 md:py-2 outline-none interactive text-sm md:text-base" />
                   </div>
 
                   <div className="relative group">
                     <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Email Frequency</label>
-                    <input type="email" required className="w-full bg-transparent border-b py-2 md:py-2 outline-none interactive text-sm md:text-base" style={{ borderColor: 'var(--border)' }} />
+                    <input type="email" name="email" required className="w-full bg-transparent border-b border-border py-2 md:py-2 outline-none interactive text-sm md:text-base" />
                   </div>
 
                   <div className="relative group">
                     <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Transmission Details</label>
-                    <textarea required rows={4} className="w-full bg-transparent border-b py-2 md:py-2 outline-none resize-none interactive text-sm md:text-base" style={{ borderColor: 'var(--border)' }}></textarea>
+                    <textarea name="message" required rows={4} className="w-full bg-transparent border-b border-border py-2 md:py-2 outline-none resize-none interactive text-sm md:text-base"></textarea>
                   </div>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 md:py-4 rounded-lg md:rounded-xl font-semibold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] interactive group flex items-center justify-center gap-2 md:gap-3 hover:underline"
-                  style={{ backgroundColor: 'var(--accent-1)', color: 'var(--bg-primary)' }}
+                  className="w-full py-3 md:py-4 rounded-lg md:rounded-xl font-semibold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] interactive group flex items-center justify-center gap-2 md:gap-3 hover:underline bg-accent-1 text-bg-primary"
                 >
                   <span>{isSubmitting ? 'Transmitting...' : 'Send Signal'}</span>
                   {!isSubmitting && (
