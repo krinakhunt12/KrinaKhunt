@@ -3,6 +3,15 @@
 /* Only essential transitions for interactive elements */
 button,
 a,
+summary,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  cursor: pointer;
+}
+
+button,
+a,
 input,
 textarea,
 select {

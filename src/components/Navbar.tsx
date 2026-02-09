@@ -57,7 +57,7 @@ const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
         <div className="container max-w-6xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center">
             {/* Brand Name with right margin for breathing room */}
-            <a href="#home" className="group interactive flex flex-col items-start min-w-max mr-8 lg:mr-12">
+            <a href="#home" className="nav-link group interactive flex flex-col items-start min-w-max mr-8 lg:mr-12">
               <span className="text-xl md:text-2xl font-semibold leading-none tracking-tighter uppercase">Krina</span>
               <span className="text-xs md:text-sm font-semibold tracking-[0.3em] opacity-50 uppercase leading-none mt-1">Khunt</span>
             </a>
