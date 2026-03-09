@@ -9,60 +9,20 @@ export const PROJECTS: Project[] = [
     tech: ["Tailwind CSS", "Framer Motion", "React"],
     category: "frontend",
     liveUrl: "https://grand-dine-restaurant.vercel.app/",
-    githubUrl: "https://github.com/krinakhunt12"
+    githubUrl: "https://github.com/krinakhunt12/GrandDine_Restaurant.git"
   },
   {
     id: 2,
-    title: "Diabetic Prediction System",
-    description: "A machine learning–based system that predicts diabetic patient outcomes using advanced data analysis and predictive modeling techniques.",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
-    tech: ["Numpy", "Matplotlib", "Seaborn", "Python", "Scikit-learn", "Panda", "Jupyter Notebook"],
-    category: "ml",
-    liveUrl: "https://github.com/krinakhunt12",
-    githubUrl: "https://github.com/krinakhunt12"
-  },
-  {
-    id: 3,
-    title: "E-Commerce Website",
-    description: "A modern full-stack e-commerce platform featuring dynamic product management, shopping cart, user authentication, and secure checkout with a responsive UI.",
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800",
-    tech: ["React", "JavaScript", "Tailwind CSS", "Framer Motion", "Node.js", "Express", "MongoDB"],
-    category: "fullstack",
-    liveUrl: "https://github.com/krinakhunt12",
-    githubUrl: "https://github.com/krinakhunt12"
-  },
-  {
-    id: 4,
     title: "Medibot Chatbot",
-    description: "An AI-powered medical chatbot that provides healthcare assistance, symptom analysis, and accurate medical information through natural language processing.",
-    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=800",
-    tech: ["Scikit-Learn", "PyTorach", "Spacy", "Python"],
-    category: "fullstack",
-    liveUrl: "https://github.com/krinakhunt12",
-    githubUrl: "https://github.com/krinakhunt12"
-  },
-  {
-    id: 5,
-    title: "Plant Disease Detection",
-    description: "An intelligent computer vision system that detects plant diseases using deep learning, helping farmers identify issues quickly and accurately.",
-    image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&q=80&w=800",
-    tech: ["Python", "TensorFlow", "Keras", "OpenCV"],
-    category: "ml",
-    liveUrl: "https://github.com/krinakhunt12",
-    githubUrl: "https://github.com/krinakhunt12"
-  },
-  {
-    id: 6,
-    title: "Aurelia Luxe Jewellery",
     description: "An intelligent computer vision system that detects plant diseases using deep learning, helping farmers identify issues quickly and accurately.",
     image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800",
     tech: ["React.js", "TypeScript", "Tailwind"],
     category: "frontend",
     liveUrl: "https://aurelia-luxe.netlify.app/",
-    githubUrl: "https://github.com/krinakhunt12"
+    githubUrl: "https://github.com/krinakhunt12/Aurelia-Luxe.git"
   },
   {
-    id: 7,
+    id: 3,
     title: "PDF Merge Tools",
     description: "An intelligent computer vision system that detects plant diseases using deep learning, helping farmers identify issues quickly and accurately.",
     image: "https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&q=80&w=800",
@@ -72,23 +32,53 @@ export const PROJECTS: Project[] = [
     githubUrl: "https://github.com/krinakhunt12"
   },
   {
-    id: 8,
+    id: 4,
+    title: "Diabetic Prediction System",
+    description: "A machine learning–based system that predicts diabetic patient outcomes using advanced data analysis and predictive modeling techniques.",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
+    tech: ["Numpy", "Matplotlib", "Seaborn", "Python", "Scikit-learn", "Panda", "Jupyter Notebook"],
+    category: "ml",
+    liveUrl: "https://github.com/krinakhunt12/Healthcare-Prediction-on-Diabetic-Patients.git",
+    githubUrl: "https://github.com/krinakhunt12/Healthcare-Prediction-on-Diabetic-Patients.git"
+  },
+  {
+    id: 5,
+    title: "Medibot Chatbot",
+    description: "An AI-powered medical chatbot that provides healthcare assistance, symptom analysis, and accurate medical information through natural language processing.",
+    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=800",
+    tech: ["Scikit-Learn", "PyTorach", "Spacy", "Python"],
+    category: "fullstack",
+    liveUrl: "https://github.com/krinakhunt12/Medibot_Project.git",
+    githubUrl: "https://github.com/krinakhunt12/Medibot_Project.git"
+  },
+  {
+    id: 6,
+    title: "Plant Disease Detection",
+    description: "An intelligent computer vision system that detects plant diseases using deep learning, helping farmers identify issues quickly and accurately.",
+    image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&q=80&w=800",
+    tech: ["Python", "TensorFlow", "Keras", "OpenCV"],
+    category: "ml",
+    liveUrl: "https://github.com/krinakhunt12/Plant_Disease_Detection_System.git",
+    githubUrl: "https://github.com/krinakhunt12/Plant_Disease_Detection_System.git"
+  },
+  {
+    id: 7,    
     title: "Code Comment Quality Checker",
     description: "An AI-powered tool that analyzes code comments for quality, clarity, and completeness. Helps developers maintain clean, well-documented codebases with intelligent feedback.",
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=800",
     tech: ["React.js", "TypeScript", "Tailwind", "Python"],
     category: "fullstack",
-    liveUrl: "https://pdf-merge-livid.vercel.app/",
+    liveUrl: "https://github.com/krinakhunt12/CommentIQ.git",
     githubUrl: "https://github.com/krinakhunt12/CommentIQ.git"
   },
   {
-    id: 9,
+    id: 8,
     title: "HiveHR",
     description: "A comprehensive HR management system built with React and Supabase, streamlining employee management, attendance tracking, and organizational workflows.",
     image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800",
     tech: ["React.js", "TypeScript", "Tailwind", "Supabase"],
     category: "fullstack",
-    liveUrl: "https://pdf-merge-livid.vercel.app/",
+    liveUrl: "https://github.com/krinakhunt12/HiveHR.git",
     githubUrl: "https://github.com/krinakhunt12/HiveHR.git"
   }
 ];
