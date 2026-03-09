@@ -13,14 +13,16 @@ const About: React.FC = () => {
   return (
     <section id="about" className="py-12 md:py-20 lg:py-24 px-4 md:px-6 overflow-hidden bg-secondary">
       <div className="container max-w-6xl mx-auto px-2 md:px-6">
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
-          <div className="relative">
-            <div className="relative z-10 rounded-2xl overflow-hidden border group border-border">
-              <img
-                src="/about-image.png"
-                alt="Professional Workspace"
-                className="w-full h-auto"
-              />
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-stretch">
+          <div className="relative flex flex-col min-h-0">
+            <div className="relative z-10 flex-1 min-h-[280px] md:min-h-0 rounded-2xl overflow-hidden border group border-border flex flex-col">
+              <div className="flex-1 min-h-0 relative">
+                <img
+                  src="/about-image.png"
+                  alt="Professional Workspace"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
             </div>
 
             {/* Decorative Elements */}
@@ -30,7 +32,7 @@ const About: React.FC = () => {
             <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-white/5 rounded-full blur-3xl" />
           </div>
 
-          <div className="space-y-8">
+          <div className="flex flex-col min-h-0 space-y-8">
             <div className="space-y-3 md:space-y-4">
               <h3 className="mono text-sm md:text-base uppercase tracking-[0.3em] text-secondary opacity-60">01 // Discovery</h3>
               <h2 className="text-4xl md:text-5xl font-semibold leading-tight">
@@ -49,7 +51,7 @@ const About: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 py-8">
+            <div className="grid grid-cols-2 gap-4 py-2">
               {stats.map((stat, i) => (
                 <div key={i} className="px-2 py-4 md:p-8 rounded-xl border relative bg-primary border-border">
                   <div className="relative z-10">

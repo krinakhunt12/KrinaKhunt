@@ -12,19 +12,21 @@ const ThemeToggle: React.FC = () => {
       onClick={toggleTheme}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       aria-pressed={isDark}
-      className="relative inline-flex items-center cursor-pointer h-8 w-14 rounded-full border transition-colors duration-300 select-none"
+      className="relative inline-flex items-center cursor-pointer h-8 w-14 rounded-full border select-none ease-out"
       style={{
         backgroundColor: isDark ? 'var(--accent-1)' : 'var(--bg-secondary)',
         borderColor: 'var(--border)',
+        transition: 'background-color 0.3s ease, border-color 0.3s ease',
       }}
     >
       {/* Toggle Circle */}
       <span
-        className="absolute inline-flex items-center justify-center h-6 w-6 rounded-full transition-transform duration-300"
+        className="absolute inline-flex items-center justify-center h-6 w-6 rounded-full ease-out"
         style={{
           backgroundColor: 'var(--bg-primary)',
           transform: isDark ? 'translateX(1.8rem)' : 'translateX(0.25rem)',
           boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+          transition: 'transform 0.3s ease, background-color 0.3s ease',
         }}
       >
         {/* Icon inside circle */}

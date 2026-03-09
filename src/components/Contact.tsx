@@ -63,10 +63,10 @@ const Contact: React.FC = () => {
   return (
     <section id="contact" className="py-12 md:py-16 lg:py-20 px-4 md:px-6 relative overflow-hidden">
       <div className="container max-w-6xl mx-auto px-2 md:px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-16 items-stretch">
 
           {/* Left Column: Let's Connect Info */}
-          <div className="space-y-6 md:space-y-8 lg:space-y-10">
+          <div className="flex flex-col h-full min-h-0 space-y-6 md:space-y-8 lg:space-y-10">
             <div className="space-y-2 md:space-y-3 lg:space-y-4">
               <h3 className="mono text-[9px] md:text-[10px] lg:text-xs uppercase tracking-[0.4em] font-semibold text-accent-1">Get in Touch</h3>
               <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-semibold tracking-tighter leading-tight">
@@ -99,8 +99,8 @@ const Contact: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div>
-            <div className="p-6 md:p-10 lg:p-12 rounded-2xl md:rounded-[3rem] border border-border bg-bg-secondary relative overflow-hidden">
+          <div className="flex flex-col h-full min-h-0">
+            <div className="flex-1 flex flex-col min-h-[320px] p-6 md:p-10 lg:p-12 rounded-2xl md:rounded-[3rem] border border-border bg-bg-secondary relative overflow-hidden">
               {isSent && (
                 <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-8 space-y-4 bg-bg-secondary">
                   <div className="w-20 h-20 rounded-full flex items-center justify-center bg-accent-1">
@@ -133,7 +133,8 @@ const Contact: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 md:py-4 rounded-lg md:rounded-xl font-semibold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] interactive group flex items-center justify-center gap-2 md:gap-3 hover:underline bg-accent-1 text-bg-primary"
+                  className="w-full py-3 md:py-4 rounded-lg md:rounded-xl font-semibold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] interactive group flex items-center justify-center gap-2 md:gap-3 hover:underline border-2"
+                  style={{ backgroundColor: 'var(--accent-1)', color: 'var(--bg-primary)', borderColor: 'var(--accent-1)' }}
                 >
                   <span>{isSubmitting ? 'Transmitting...' : 'Send Signal'}</span>
                   {!isSubmitting && (
