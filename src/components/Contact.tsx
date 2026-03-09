@@ -101,47 +101,54 @@ const Contact: React.FC = () => {
           {/* Right Column: Contact Form */}
           <div className="flex flex-col h-full min-h-0">
             <div className="flex-1 flex flex-col min-h-[320px] p-6 md:p-10 lg:p-12 rounded-2xl md:rounded-[3rem] border border-border bg-bg-secondary relative overflow-hidden">
-              {isSent && (
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-8 space-y-4 bg-bg-secondary">
-                  <div className="w-20 h-20 rounded-full flex items-center justify-center bg-accent-1">
+              {isSent ? (
+                <div className="flex-1 flex flex-col items-center justify-center text-center p-8 space-y-6 animate-in fade-in zoom-in duration-500">
+                  <div className="w-20 h-20 rounded-full flex items-center justify-center bg-accent-1 shadow-lg shadow-white/10">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-black"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </div>
-                  <h4 className="text-xl font-semibold">Transmission Sent!</h4>
-                  <p className="opacity-60 text-sm">Thank you for identifying yourself. Krina Khunt will reach out soon.</p>
-                  <button onClick={() => setIsSent(false)} className="mt-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest border-b border-border pb-1 hover:underline">Send another</button>
+                  <div className="space-y-2">
+                    <h4 className="text-2xl font-bold tracking-tight">Transmission Sent!</h4>
+                    <p className="opacity-60 text-sm max-w-[280px] mx-auto">Thank you for identifying yourself. Krina Khunt will reach out soon.</p>
+                  </div>
+                  <button 
+                    onClick={() => setIsSent(false)} 
+                    className="mt-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest border-b border-accent-1 pb-1 hover:text-accent-1 transition-colors"
+                  >
+                    Send another signal
+                  </button>
                 </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8 lg:space-y-10">
+                  <div className="space-y-8">
+                    <div className="relative group">
+                      <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Identify Yourself</label>
+                      <input type="text" name="Full Name" required className="w-full bg-transparent border-b border-border py-2 md:py-2 outline-none interactive text-sm md:text-base focus:border-accent-1 transition-colors" />
+                    </div>
+
+                    <div className="relative group">
+                      <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Email Frequency</label>
+                      <input type="email" name="email" required className="w-full bg-transparent border-b border-border py-2 md:py-2 outline-none interactive text-sm md:text-base focus:border-accent-1 transition-colors" />
+                    </div>
+
+                    <div className="relative group">
+                      <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Transmission Details</label>
+                      <textarea name="message" required rows={4} className="w-full bg-transparent border-b border-border py-2 md:py-2 outline-none resize-none interactive text-sm md:text-base focus:border-accent-1 transition-colors"></textarea>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full py-3 md:py-4 rounded-lg md:rounded-xl font-semibold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] interactive group flex items-center justify-center gap-2 md:gap-3 hover:underline border-2"
+                    style={{ backgroundColor: 'var(--accent-1)', color: 'var(--bg-primary)', borderColor: 'var(--accent-1)' }}
+                  >
+                    <span>{isSubmitting ? 'Transmitting...' : 'Send Signal'}</span>
+                    {!isSubmitting && (
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    )}
+                  </button>
+                </form>
               )}
-
-              <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8 lg:space-y-10">
-                <div className="space-y-8">
-                  <div className="relative group">
-                    <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Identify Yourself</label>
-                    <input type="text" name="Full Name" required className="w-full bg-transparent border-b border-border py-2 md:py-2 outline-none interactive text-sm md:text-base" />
-                  </div>
-
-                  <div className="relative group">
-                    <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Email Frequency</label>
-                    <input type="email" name="email" required className="w-full bg-transparent border-b border-border py-2 md:py-2 outline-none interactive text-sm md:text-base" />
-                  </div>
-
-                  <div className="relative group">
-                    <label className="block text-[9px] md:text-[10px] uppercase tracking-[0.2em] font-semibold opacity-50 mb-1 md:mb-1">Transmission Details</label>
-                    <textarea name="message" required rows={4} className="w-full bg-transparent border-b border-border py-2 md:py-2 outline-none resize-none interactive text-sm md:text-base"></textarea>
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3 md:py-4 rounded-lg md:rounded-xl font-semibold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] interactive group flex items-center justify-center gap-2 md:gap-3 hover:underline border-2"
-                  style={{ backgroundColor: 'var(--accent-1)', color: 'var(--bg-primary)', borderColor: 'var(--accent-1)' }}
-                >
-                  <span>{isSubmitting ? 'Transmitting...' : 'Send Signal'}</span>
-                  {!isSubmitting && (
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                  )}
-                </button>
-              </form>
             </div>
           </div>
 
