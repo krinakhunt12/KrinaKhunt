@@ -70,16 +70,6 @@ export const PROJECTS: Project[] = [
     category: "fullstack",
     liveUrl: "https://github.com/krinakhunt12/CommentIQ.git",
     githubUrl: "https://github.com/krinakhunt12/CommentIQ.git"
-  },
-  {
-    id: 8,
-    title: "HiveHR",
-    description: "A comprehensive HR management system built with React and Supabase, streamlining employee management, attendance tracking, and organizational workflows.",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800",
-    tech: ["React.js", "TypeScript", "Tailwind", "Supabase"],
-    category: "fullstack",
-    liveUrl: "https://github.com/krinakhunt12/HiveHR.git",
-    githubUrl: "https://github.com/krinakhunt12/HiveHR.git"
   }
 ];
 
