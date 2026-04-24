@@ -1,77 +1,142 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { PROJECTS } from '../constants';
 
-const Projects: React.FC = () => {
+interface ProjectsProps { limit?: number; hideHeader?: boolean; }
+
+const CATEGORIES = ['all', 'frontend', 'fullstack', 'ml'];
+const CAT_LABELS: Record<string, string> = { all: 'All', frontend: 'Frontend', fullstack: 'Full Stack', ml: 'Machine Learning' };
+
+const Projects: React.FC<ProjectsProps> = ({ limit, hideHeader }) => {
   const [filter, setFilter] = useState('all');
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setInView(true); observer.disconnect(); } }, { threshold: 0.08 });
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   const filtered = PROJECTS.filter(p => filter === 'all' || p.category === filter);
+  const displayed = limit ? filtered.slice(0, limit) : filtered;
 
   return (
-    <section id="projects" className="py-12 md:py-20 lg:py-24 px-4 md:px-6 bg-secondary">
+    <section ref={sectionRef} id="projects" className={`py-12 md:py-20 lg:py-24 px-4 md:px-6 ${hideHeader ? 'pt-0' : ''}`} style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div className="container max-w-6xl mx-auto px-2 md:px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 lg:mb-16 gap-6 md:gap-8">
-          <div className="space-y-2 md:space-y-4">
-            <h3 className="mono text-xs md:text-sm uppercase tracking-[0.3em] text-accent-1 opacity-60">Showcase</h3>
-            <h2 className="text-4xl md:text-5xl font-semibold">Featured <span className="text-accent-1 opacity-60">Creations</span></h2>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {['all', 'frontend', 'backend', 'fullstack', 'ml'].map(cat => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className="px-4 md:px-6 py-1.5 md:py-2 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest interactive hover:underline"
-                style={{
-                  backgroundColor: filter === cat ? 'var(--accent-1)' : 'transparent',
-                  color: filter === cat ? 'var(--bg-primary)' : 'var(--text-secondary)',
-                  border: `1px solid ${filter === cat ? 'var(--accent-1)' : 'var(--border)'}`
-                }}
-              >
-                {cat === 'ml' ? 'Machine Learning' : cat}
-              </button>
-            ))}
-          </div>
-        </div>
 
-        <div className="grid md:grid-cols-2 gap-6 md:gap-10 lg:gap-12">
-          {filtered.map((project) => (
-            <div
-              key={project.id}
-              className="group relative rounded-3xl overflow-hidden border border-border bg-primary"
+        {/* Header */}
+        {!hideHeader && (
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6"
+            style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateY(0)' : 'translateY(30px)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}
+          >
+            <div className="space-y-2 md:space-y-3">
+              <h3 className="mono text-xs md:text-sm uppercase tracking-[0.35em] opacity-50" style={{ color: 'var(--text-secondary)' }}>Showcase</h3>
+              <h2 className="text-4xl md:text-5xl font-bold">
+                {limit ? 'Featured ' : 'All '}<span style={{ color: 'var(--accent-1)', opacity: 0.65 }}>Creations</span>
+              </h2>
+            </div>
+            {!limit && (
+              <div className="flex flex-wrap gap-2">
+                {CATEGORIES.map(cat => (
+                  <button key={cat} onClick={() => setFilter(cat)}
+                    className="px-4 md:px-5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-200"
+                    style={{
+                      backgroundColor: filter === cat ? 'var(--accent-1)' : 'transparent',
+                      color: filter === cat ? 'var(--bg-primary)' : 'var(--text-secondary)',
+                      border: `1px solid ${filter === cat ? 'var(--accent-1)' : 'var(--border)'}`,
+                    }}
+                  >
+                    {CAT_LABELS[cat]}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Project Grid */}
+        <div className="grid md:grid-cols-2 gap-6 md:gap-10">
+          {displayed.map((project, idx) => (
+            <div key={project.id}
+              className="group relative rounded-2xl overflow-hidden border"
+              style={{
+                borderColor: 'var(--border)',
+                backgroundColor: 'var(--bg-primary)',
+                opacity: inView ? 1 : 0,
+                transform: inView ? 'translateY(0)' : 'translateY(40px)',
+                transition: `opacity 0.7s ease ${idx * 0.1}s, transform 0.7s ease ${idx * 0.1}s`,
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-1)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
             >
-              <div className="relative h-64 md:h-72 lg:h-80 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
+              {/* Image */}
+              <div className="relative h-60 md:h-72 overflow-hidden">
+                <img src={project.image} alt={project.title} className="w-full h-full object-cover" style={{ transition: 'transform 0.5s ease' }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.transform = 'scale(1.06)'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.transform = 'scale(1)'}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)' }} />
 
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-180 flex items-center justify-center p-4 md:p-6 lg:p-8">
-                  <div className="text-center space-y-4 md:space-y-6">
+                {/* Category badge */}
+                <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest"
+                  style={{ backgroundColor: 'rgba(0,0,0,0.7)', color: 'var(--text-secondary)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  {project.category}
+                </div>
+
+                {/* Hover overlay */}
+                <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100"
+                  style={{ backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)', transition: 'opacity 0.3s ease' }}>
+                  <div className="text-center space-y-5">
                     <p className="text-white text-xs md:text-sm leading-relaxed">{project.description}</p>
                     <div className="flex justify-center gap-4">
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:underline"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a>
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white text-white flex items-center justify-center hover:underline"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                        style={{ backgroundColor: 'white', color: 'black', transition: 'opacity 0.2s' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        Live Demo
+                      </a>
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                        style={{ border: '1px solid white', color: 'white', transition: 'background-color 0.2s' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                        GitHub
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="p-6 md:p-8 lg:p-10 space-y-4 md:space-y-6">
+              {/* Info */}
+              <div className="p-6 md:p-8 space-y-4">
                 <div className="flex justify-between items-start gap-3">
-                  <h4 className="text-xl md:text-2xl lg:text-3xl font-semibold group-hover:text-[var(--accent-1)] transition-colors">{project.title}</h4>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-40 whitespace-nowrap">{project.category}</span>
+                  <h4 className="text-xl md:text-2xl font-bold tracking-tight" style={{ transition: 'color 0.2s' }}>{project.title}</h4>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map(t => (
-                    <span key={t} className="text-[10px] font-bold uppercase tracking-widest px-3 md:px-4 py-1 md:py-1.5 rounded-full border border-border group-hover:border-[var(--accent-1)] transition-colors">{t}</span>
+                    <span key={t} className="text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border" style={{ borderColor: 'var(--border)', color: 'var(--text-secondary)', transition: 'border-color 0.2s' }}>
+                      {t}
+                    </span>
                   ))}
                 </div>
               </div>
             </div>
           ))}
         </div>
+
+        {limit && PROJECTS.length > limit && (
+          <div className="mt-14 text-center">
+            <Link to="/projects"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs no-underline hover:no-underline"
+              style={{ border: '2px solid var(--accent-1)', color: 'var(--accent-1)', transition: 'background-color 0.2s, color 0.2s' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--accent-1)'; (e.currentTarget as HTMLElement).style.color = 'var(--bg-primary)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-1)'; }}
+            >
+              <span>View All Projects</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

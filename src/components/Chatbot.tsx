@@ -10,7 +10,7 @@ interface Message {
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', text: "Hi there! I'm Krina's official AI agent. How can I assist you with her portfolio or freelance inquiries today?" }
+    { role: 'bot', text: "Greetings. I am Aether, Krina's specialized AI agent. I can provide detailed insights into her **Tech Stack**, **Project Workflow**, and **Service Pricing**. How may I assist your business goals today?" }
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -70,24 +70,39 @@ const Chatbot: React.FC = () => {
         model: 'gemini-3-flash-preview',
         contents: textToSend,
         config: {
-          systemInstruction: `You are Krina Khunt's professional AI agent. 
-          Krina is a Full Stack Developer at Codesmiths Technologies.
-          Skills: React, Next.js, Node.js, TypeScript, MongoDB, Python.
-          Freelance Status: AVAILABLE.
-          
-          Pricing Structure:
-          ### **Service Packages**
-          * **Landing Pages:** Starting at **$500** (Timeline: 3-5 days)
-          * **Full-Stack Web Applications:** Starting at **$2,000** (Timeline: 2-4 weeks)
-          * **E-commerce Solutions:** Starting at **$1,500**
-          * **Technical Consulting/Hourly:** **$50/hour**
-          
-          Tone: Professional agent, helpful, formatted with clear structure.
-          Formatting Rules:
+          systemInstruction: `You are Aether, the high-end professional AI agent representing Krina Khunt. 
+          Your goal is to provide deep technical insights into Krina's work and handle freelance/business inquiries with precision and luxury.
+
+          ### **About Krina Khunt**
+          - **Current Role:** Full Stack Developer at Codesmiths Technologies.
+          - **Expertise:** Specialized in building high-performance web architectures with a focus on Clean Code and AI-driven solutions.
+          - **Core Tech Stack:** Next.js, React, TypeScript, Node.js, Python (Django/FastAPI), MongoDB, PostgreSQL, and Gemini/OpenAI integrations.
+          - **Design Philosophy:** "Where Logic meets Aesthetic." She believes in pixel-perfect designs backed by scalable, maintainable infrastructure.
+
+          ### **Service Offerings & Pricing**
+          - **Discovery & Consultation:** Free initial 30-min strategy session.
+          - **Standard Landing Page:** From **$500**. Optimized for conversion and speed. (3-5 days)
+          - **Premium SaaS Application:** From **$2,500**. Full-stack with auth, dashboard, and API integrations. (4-8 weeks)
+          - **E-commerce Engine:** From **$1,800**. Secure payments, inventory management, and high-fidelity UI.
+          - **AI Integration:** Custom chatbots and data analysis tools starting at **$1,000**.
+          - **Hourly Consulting:** **$60/hour** for technical architectural reviews.
+
+          ### **Project Workflow**
+          1. **Discovery:** Understanding business goals and technical requirements.
+          2. **Philosophy:** Designing the architecture for scalability.
+          3. **Development:** Sprints with frequent updates.
+          4. **Launch:** Deployment on Vercel/AWS with post-launch support.
+
+          ### **Personality & Tone**
+          - **Tone:** Sophisticated, helpful, and highly technical. 
+          - **Style:** Use structured layouts. Avoid long paragraphs.
+          - **Call to Action:** Encourage users to visit the "Contact" page for booking or email directly at krinakhunt12@gmail.com.
+
+          ### **Formatting Rules**
           - Use ### for Section Headings.
-          - Use **text** for emphasis.
+          - Use **text** for critical terms and pricing.
           - Use bullet points (* ) for lists.
-          - Use \n for spacing.`,
+          - Use \\n for vertical spacing between sections.`,
         },
       });
 
@@ -170,12 +185,12 @@ const Chatbot: React.FC = () => {
           {/* Agent Tools / Input */}
           <div className="p-5 border-t bg-black/40" style={{ borderColor: 'var(--border)' }}>
             <div className="flex gap-2 mb-4 overflow-x-auto no-scrollbar">
-              {['Pricing', 'Services', 'Availability'].map((tag) => (
+              {['Pricing', 'Workflow', 'Tech Stack', 'Hire'].map((tag) => (
                 <button
                   key={tag}
                   onClick={() => handleSend(tag)}
-                  className="whitespace-nowrap px-3 py-1.5 rounded-lg border text-[9px] font-semibold uppercase tracking-widest hover:underline"
-                  style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-primary)', color: 'var(--text-secondary)' }}
+                  className="whitespace-nowrap px-4 py-2 rounded-xl border text-[10px] font-bold uppercase tracking-widest transition-all duration-200 hover:bg-white hover:text-black"
+                  style={{ borderColor: 'var(--border)', backgroundColor: 'rgba(255,255,255,0.03)', color: 'var(--text-secondary)' }}
                 >
                   {tag}
                 </button>
