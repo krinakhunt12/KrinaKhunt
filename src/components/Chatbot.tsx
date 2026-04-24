@@ -25,33 +25,52 @@ const Chatbot: React.FC = () => {
   }, [messages, isTyping]);
 
   const formatMessage = (text: string) => {
-    return text.split('\n').map((line, i) => {
-      const parts = line.split(/(\*\*.*?\*\*)/g);
-      const renderedLine = parts.map((part, j) => {
-        if (part.startsWith('**') && part.endsWith('**')) {
-          return <strong key={j} className="font-semibold text-[var(--accent-1)]">{part.slice(2, -2)}</strong>;
-        }
-        return part;
-      });
+    // Sanitize <br> tags and replace with newlines
+    const sanitizedText = text.replace(/<br\s*\/?>/gi, '\n');
+
+    return sanitizedText.split('\n').map((line, i) => {
+      // Helper to render text with bold parts as JSX
+      const renderTextWithBold = (content: string) => {
+        const parts = content.split(/(\*\*.*?\*\*)/g);
+        return parts.map((part, j) => {
+          if (part.startsWith('**') && part.endsWith('**')) {
+            return (
+              <strong key={j} className="font-bold text-[var(--accent-1)]">
+                {part.slice(2, -2)}
+              </strong>
+            );
+          }
+          return part;
+        });
+      };
 
       if (line.startsWith('###')) {
+        const content = line.replace(/^###\s*/, '');
         return (
-          <div key={i} className="mt-4 mb-2 text-[10px] font-semibold uppercase tracking-widest text-[var(--accent-1)] border-b border-white/10 pb-1">
-            {renderedLine.join('').replace(/^###\s*/, '')}
+          <div key={i} className="mt-4 mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent-1)] border-b border-white/10 pb-1">
+            {renderTextWithBold(content)}
           </div>
         );
       }
 
-      if (line.trim().startsWith('* ') || line.trim().startsWith('- ')) {
+      const trimmedLine = line.trim();
+      if (trimmedLine.startsWith('* ') || trimmedLine.startsWith('- ')) {
+        const content = trimmedLine.replace(/^[\*\-]\s*/, '');
         return (
           <div key={i} className="flex gap-2 ml-1 my-1.5 items-start">
-            <span className="text-[var(--accent-1)] mt-1.5 w-1 h-1 rounded-full bg-[var(--accent-1)] flex-shrink-0"></span>
-            <span className="leading-relaxed">{renderedLine}</span>
+            <span className="text-[var(--accent-1)] mt-1.5 w-1.5 h-1.5 rounded-full bg-[var(--accent-1)] flex-shrink-0 animate-pulse"></span>
+            <span className="leading-relaxed">{renderTextWithBold(content)}</span>
           </div>
         );
       }
 
-      return <div key={i} className="min-h-[1.2em] leading-relaxed mb-1">{renderedLine}</div>;
+      if (!line.trim()) return <div key={i} className="h-2" />;
+
+      return (
+        <div key={i} className="min-h-[1.2em] leading-relaxed mb-1.5">
+          {renderTextWithBold(line)}
+        </div>
+      );
     });
   };
 
@@ -119,26 +138,26 @@ const Chatbot: React.FC = () => {
     <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end">
       {isOpen && (
         <div
-          className="mb-4 w-[92vw] h-[84vh] md:w-[400px] md:h-[600px] rounded-[2.5rem] flex flex-col overflow-hidden border transition-colors duration-180"
+          className="fixed inset-0 z-[10000] md:static md:z-auto md:mb-4 w-full h-full md:w-[400px] md:h-[500px] md:rounded-[2.5rem] flex flex-col overflow-hidden md:border transition-all duration-300"
           style={{
             backgroundColor: 'var(--bg-secondary)',
             borderColor: 'var(--border)',
           }}
         >
           {/* Agent Header */}
-          <div className="p-6 border-b flex justify-between items-center bg-white/[0.02]" style={{ borderColor: 'var(--border)' }}>
+          <div className="p-5 md:p-6 border-b flex justify-between items-center bg-white/[0.02]" style={{ borderColor: 'var(--border)' }}>
             <div className="flex items-center gap-4">
               <div className="relative">
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center relative overflow-hidden group" style={{ backgroundColor: 'var(--accent-1)' }}>
-                  <span className="text-black font-semibold text-xs tracking-tighter">AGENT</span>
+                  <span className="font-bold text-[10px] tracking-tighter" style={{ color: 'var(--bg-primary)' }}>AGENT</span>
                   <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent" />
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-[3px] rounded-full" style={{ borderColor: 'var(--bg-secondary)' }} />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <div className="text-[13px] font-semibold uppercase tracking-wider">Aether Agent</div>
-                  <div className="px-1.5 py-0.5 rounded bg-[var(--accent-1)]/10 text-[8px] font-semibold text-[var(--accent-1)] border border-[var(--accent-1)]/20 tracking-widest">VERIFIED</div>
+                  <div className="text-[13px] font-bold uppercase tracking-wider" style={{ color: 'var(--text-primary)' }}>Aether Agent</div>
+                  <div className="px-1.5 py-0.5 rounded bg-[var(--accent-1)] text-[8px] font-bold tracking-widest" style={{ color: 'var(--bg-primary)' }}>VERIFIED</div>
                 </div>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
@@ -183,7 +202,7 @@ const Chatbot: React.FC = () => {
           </div>
 
           {/* Agent Tools / Input */}
-          <div className="p-5 border-t bg-black/40" style={{ borderColor: 'var(--border)' }}>
+          <div className="p-5 border-t" style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-secondary)' }}>
             <div className="flex gap-2 mb-4 overflow-x-auto no-scrollbar">
               {['Pricing', 'Workflow', 'Tech Stack', 'Hire'].map((tag) => (
                 <button
@@ -198,19 +217,23 @@ const Chatbot: React.FC = () => {
             </div>
             <form
               onSubmit={(e) => { e.preventDefault(); handleSend(); }}
-              className="flex items-center gap-2 rounded-2xl border p-1.5"
-              style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-primary)' }}
+              className="flex items-center gap-2 rounded-2xl border p-1.5 focus-within:border-[var(--accent-1)] transition-colors"
+              style={{ 
+                borderColor: 'var(--accent-3)', 
+                backgroundColor: 'var(--bg-primary)' 
+              }}
             >
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Inquire with the agent..."
-                className="flex-1 bg-transparent px-4 py-2 outline-none text-xs font-medium placeholder:opacity-30"
+                className="flex-1 bg-transparent px-4 py-2 outline-none text-[13px] font-medium placeholder:opacity-40"
+                style={{ color: 'var(--text-primary)' }}
               />
               <button
                 type="submit"
                 disabled={!input.trim()}
-                className="w-10 h-10 rounded-xl flex items-center justify-center disabled:opacity-20 disabled:grayscale"
+                className="w-10 h-10 rounded-xl flex items-center justify-center disabled:opacity-20 disabled:grayscale transition-transform active:scale-90"
                 style={{ backgroundColor: 'var(--accent-1)', color: 'var(--bg-primary)' }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
