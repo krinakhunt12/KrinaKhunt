@@ -8,7 +8,7 @@ interface SEOProps {
   url?: string;
 }
 
-const SEO: React.FC<SEOProps> = ({ title, description, keywords }) => {
+const SEO: React.FC<SEOProps> = ({ title, description, keywords, image, url }) => {
   useEffect(() => {
     // Update Title
     document.title = `${title} | Krina Khunt`;
@@ -107,7 +107,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, keywords }) => {
       // fail silently
     }
 
-  }, [title, description, keywords]);
+  }, [title, description, keywords, image, url]);
 
   return null;
 };
