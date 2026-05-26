@@ -84,21 +84,19 @@ const Projects: React.FC<ProjectsProps> = ({ limit, hideHeader }) => {
                   {project.category}
                 </div>
 
-                {/* Hover overlay */}
-                <div className="absolute inset-0 flex items-center justify-center p-6 opacity-0 group-hover:opacity-100"
+                {/* Hover overlay - Desktop only */}
+                <div className="absolute inset-0 hidden xl:flex items-center justify-center p-6 xl:opacity-0 xl:group-hover:opacity-100"
                   style={{ backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)', transition: 'opacity 0.3s ease' }}>
                   <div className="text-center space-y-5">
                     <p className="text-white text-xs md:text-sm leading-relaxed">{project.description}</p>
                     <div className="flex justify-center gap-4">
                       <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
-                        style={{ backgroundColor: 'white', color: 'black', transition: 'opacity 0.2s' }}>
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white text-black transition-all duration-300 hover:bg-neutral-200 hover:scale-[1.03] active:scale-[0.97]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         Live Demo
                       </a>
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
-                        style={{ border: '1px solid white', color: 'white', transition: 'background-color 0.2s' }}>
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-wider border border-white/80 text-white transition-all duration-300 hover:bg-white/10 hover:border-white hover:scale-[1.03] active:scale-[0.97]">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
                         GitHub
                       </a>
@@ -112,12 +110,40 @@ const Projects: React.FC<ProjectsProps> = ({ limit, hideHeader }) => {
                 <div className="flex justify-between items-start gap-3">
                   <h4 className="text-xl md:text-2xl font-bold tracking-tight" style={{ transition: 'color 0.2s' }}>{project.title}</h4>
                 </div>
+
+                {/* Description - Mobile & Tablet only */}
+                <p className="text-xs md:text-sm opacity-70 leading-relaxed font-light xl:hidden" style={{ color: 'var(--text-secondary)' }}>
+                  {project.description}
+                </p>
+
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map(t => (
                     <span key={t} className="text-[9px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border" style={{ borderColor: 'var(--border)', color: 'var(--text-secondary)', transition: 'border-color 0.2s' }}>
                       {t}
                     </span>
                   ))}
+                </div>
+
+                {/* Action Buttons - Mobile & Tablet only */}
+                <div className="flex gap-3 pt-2 xl:hidden">
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-wider flex-1 text-center border-2 transition-all duration-300 active:scale-[0.97]"
+                    style={{ backgroundColor: 'var(--accent-1)', color: 'var(--bg-primary)', borderColor: 'var(--accent-1)' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '0.85'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = '1'; }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live Demo
+                  </a>
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-[10px] font-bold uppercase tracking-wider flex-1 text-center border transition-all duration-300 active:scale-[0.97]"
+                    style={{ borderColor: 'var(--border)', color: 'var(--text-primary)', backgroundColor: 'var(--bg-secondary)' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-1)'; (e.currentTarget as HTMLElement).style.color = 'var(--accent-1)'; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    GitHub
+                  </a>
                 </div>
               </div>
             </div>

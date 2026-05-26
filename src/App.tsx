@@ -26,7 +26,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider>
       <Router>
-        <div className="relative min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+        <div className="relative min-h-[100dvh]" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
           <Background />
           <Navbar />
 

@@ -41,7 +41,7 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="contact" className="py-12 md:py-16px-4 md:px-6 relative overflow-hidden">
+    <section ref={sectionRef} id="contact" className="py-12 md:py-16 px-6 md:px-6 relative overflow-hidden">
       {/* Glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full blur-3xl -z-10" style={{ background: 'radial-gradient(ellipse, var(--accent-1), transparent)', opacity: 0.04 }} />
 

@@ -43,14 +43,14 @@ const Hero: React.FC = () => {
   });
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 md:pt-24 pb-32 md:pb-0 px-4 md:px-6 overflow-hidden">
+    <section id="home" className="relative min-h-svh flex items-center justify-center pt-20 md:pt-24 pb-16 md:pb-0 px-4 md:px-6 overflow-hidden">
       <div className="absolute inset-0 -z-10" style={{ backgroundImage: 'linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)', backgroundSize: '60px 60px', opacity: 0.04 }} />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full -z-10" style={{ background: 'radial-gradient(circle, var(--accent-1) 0%, transparent 70%)', opacity: 0.04, filter: 'blur(40px)' }} />
 
       <div className="container max-w-6xl mx-auto px-2 md:px-6">
-        <div className="grid md:grid-cols-2 gap-16 md:gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
 
-          <div className="space-y-8 md:space-y-10 order-2 md:order-1">
+          <div className="space-y-6 md:space-y-10 order-2 md:order-1">
             <div style={{ borderColor: 'var(--border)', color: 'var(--text-secondary)', ...fade(0.1) }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-[10px] md:text-xs font-semibold uppercase tracking-widest">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span style={{ color: 'var(--text-secondary)' }}>Open to opportunities</span>
@@ -105,7 +105,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative flex justify-center items-center order-1 md:order-2 mb-12 md:mb-0" style={{ opacity: visible ? 1 : 0, transform: visible ? 'scale(1)' : 'scale(0.92)', transition: 'opacity 0.9s ease 0.3s, transform 0.9s ease 0.3s' }}>
+          <div className="relative flex justify-center items-center order-1 md:order-2 mb-6 md:mb-0" style={{ opacity: visible ? 1 : 0, transform: visible ? 'scale(1)' : 'scale(0.92)', transition: 'opacity 0.9s ease 0.3s, transform 0.9s ease 0.3s' }}>
             {/* Spinning Rings - scaled down on mobile */}
             <div className="absolute w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] md:w-[480px] md:h-[480px] rounded-full" style={{ border: '1px dashed var(--border)', animation: 'spin-slow 30s linear infinite', opacity: 0.3 }} />
             <div className="absolute w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] rounded-full" style={{ border: '1px dotted var(--border)', animation: 'spin-slow 20s linear infinite reverse', opacity: 0.2 }} />
