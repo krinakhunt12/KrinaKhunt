@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FiDownload, FiCode, FiCpu, FiLayers, FiGlobe } from 'react-icons/fi';
+import { useTheme } from '../hooks/useTheme';
 
 const Counter: React.FC<{ end: number }> = ({ end }) => {
   const [count, setCount] = useState(0);
@@ -28,6 +29,8 @@ const Counter: React.FC<{ end: number }> = ({ end }) => {
 };
 
 const About: React.FC = () => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
 
@@ -71,9 +74,14 @@ const About: React.FC = () => {
                 {/* Floating highlights */}
                 <div className="absolute bottom-6 left-6 right-6 grid grid-cols-2 gap-3">
                   {highlights.map((h, i) => (
-                    <div key={i} className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest backdrop-blur-md bg-white/5 border border-white/10 shadow-lg">
-                      <span className="text-accent-1">{h.icon}</span>
-                      <span className="text-white/90">{h.text}</span>
+                    <div key={i} className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest backdrop-blur-md shadow-lg border transition-all duration-300"
+                      style={{
+                        backgroundColor: isLight ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.65)',
+                        borderColor: isLight ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.15)',
+                        color: isLight ? 'var(--text-primary)' : 'rgba(255, 255, 255, 0.9)'
+                      }}>
+                      <span style={{ color: 'var(--accent-1)' }}>{h.icon}</span>
+                      <span>{h.text}</span>
                     </div>
                   ))}
                 </div>

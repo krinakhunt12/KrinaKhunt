@@ -81,6 +81,17 @@ export const PROJECTS: Project[] = [
     liveUrl: "https://github.com/krinakhunt12/LeafGuard.git",
     githubUrl: "https://github.com/krinakhunt12/LeafGuard.git"
   },
+    {
+    id: 9, // Increment this to the next number in your array
+    title: "Nova Converter",
+    description: "Nova Converter is a premium, privacy-first file and data conversion suite. Built with a React (TypeScript) frontend and a FastAPI (Python) backend, it processes all document conversions—including Markdown-to-PDF, PDF-to-Markdown, image transformations, and an intelligent dynamic JSON ↔ CSV translator—securely in-memory with custom filename preview prompts.",
+    image: "./Projects/converter.png", // Make sure to put a screenshot of your converter project in this folder!
+    tech: ["React.js", "TypeScript", "Tailwind", "FastAPI", "Python", "Pandas"],
+    category: "fullstack",
+    liveUrl: "https://document-converter-pi.vercel.app",
+    githubUrl: "https://github.com/krinakhunt12/Document-Converter.git"
+  },
+
 
   // {
   //   id: 9,

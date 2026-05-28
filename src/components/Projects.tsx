@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { PROJECTS } from '../constants';
+import { useTheme } from '../hooks/useTheme';
 
 interface ProjectsProps { limit?: number; hideHeader?: boolean; }
 
@@ -8,6 +9,8 @@ const CATEGORIES = ['all', 'frontend', 'fullstack', 'ml'];
 const CAT_LABELS: Record<string, string> = { all: 'All', frontend: 'Frontend', fullstack: 'Full Stack', ml: 'Machine Learning' };
 
 const Projects: React.FC<ProjectsProps> = ({ limit, hideHeader }) => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const [filter, setFilter] = useState('all');
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
@@ -80,7 +83,12 @@ const Projects: React.FC<ProjectsProps> = ({ limit, hideHeader }) => {
 
                 {/* Category badge */}
                 <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest"
-                  style={{ backgroundColor: 'rgba(0,0,0,0.7)', color: 'var(--text-secondary)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  style={{
+                    backgroundColor: isLight ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.75)',
+                    color: isLight ? '#1a1a1a' : '#fafafa',
+                    backdropFilter: 'blur(8px)',
+                    border: `1px solid ${isLight ? 'rgba(0, 0, 0, 0.12)' : 'rgba(255, 255, 255, 0.15)'}`
+                  }}>
                   {project.category}
                 </div>
 

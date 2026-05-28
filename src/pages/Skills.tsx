@@ -7,7 +7,11 @@ const Skills: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <main className="relative pt-20">
-      <SEO title="Technical Expertise" description="Discover Krina Khunt's technical skills including React, Next.js, TypeScript, Node.js, Python, and AI/ML integrations." />
+      <SEO 
+        title="Technical Expertise" 
+        description="Explore the technical capabilities and tools of Krina Khunt: React, Next.js, TypeScript, Node.js, Python, TensorFlow, OpenCV, FastAPI, and professional UI design." 
+        keywords="React Developer, Next.js Developer, Node.js Backend, TypeScript Portfolio, Python AI, TensorFlow, OpenCV, FastAPI Developer Skills, Frontend Architecture, Database Design" 
+      />
       {/* Decorative background element */}
       <div className="absolute top-40 -left-20 w-80 h-80 rounded-full blur-[100px] -z-10" style={{ backgroundColor: 'var(--accent-1)', opacity: 0.05 }} />
 

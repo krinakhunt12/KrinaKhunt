@@ -76,7 +76,12 @@ const Contact: React.FC = () => {
 
   return (
     <main className="relative pt-20">
-      <SEO title="Get in Touch" description="Ready to build something impactful? Reach out to Krina Khunt for freelance projects, technical collaborations, or just to say hi." />
+      <SEO 
+        title="Get in Touch" 
+        description="Ready to build something impactful? Contact Krina Khunt for full-stack engineering contracts, AI/ML integrations, or freelance technical consultations." 
+        keywords="Contact Krina Khunt, hire React developer, hire Python AI engineer, freelance full stack developer, crop disease detection ML consultant, agricultural developer India"
+        schemaType="contact"
+      />
 
       {/* Header */}
       <div className="py-12 md:py-20 px-6">

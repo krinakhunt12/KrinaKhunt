@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { PROJECTS } from '../constants';
 
 interface SEOProps {
   title: string;
@@ -6,9 +7,10 @@ interface SEOProps {
   keywords?: string;
   image?: string;
   url?: string;
+  schemaType?: 'profile' | 'projects' | 'about' | 'contact' | 'webpage';
 }
 
-const SEO: React.FC<SEOProps> = ({ title, description, keywords, image, url }) => {
+const SEO: React.FC<SEOProps> = ({ title, description, keywords, image, url, schemaType = 'webpage' }) => {
   useEffect(() => {
     // Update Title
     document.title = `${title} | Krina Khunt`;
@@ -16,7 +18,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, keywords, image, url }) =
     // Update Meta Description
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', description || "Krina Khunt — Full Stack Developer and AI enthusiast. Building high-performance web applications with React, Node.js, and AI/ML.");
+      metaDescription.setAttribute('content', description || "Krina Khunt — Full Stack Developer and AI specialist. Building high-performance web applications with React, Node.js, and AI/ML.");
     }
 
     // Update Meta Keywords
@@ -83,18 +85,116 @@ const SEO: React.FC<SEOProps> = ({ title, description, keywords, image, url }) =
       const ldId = 'seo-json-ld';
       let ld = document.getElementById(ldId) as HTMLScriptElement | null;
       const pageUrl = url || window.location.origin + window.location.pathname;
-      const ldData = {
-        '@context': 'https://schema.org',
-        '@type': 'WebPage',
-        'url': pageUrl,
-        'name': `${title} | Krina Khunt`,
-        'description': description || document.querySelector('meta[name="description"]')?.getAttribute('content') || '',
-        'author': {
-          '@type': 'Person',
-          'name': 'Krina Khunt',
-          'url': 'https://krinakhunt.in/'
-        }
-      };
+      const defaultDesc = description || document.querySelector('meta[name="description"]')?.getAttribute('content') || '';
+      
+      let ldData: Record<string, any> = {};
+
+      if (schemaType === 'profile') {
+        ldData = {
+          '@context': 'https://schema.org',
+          '@type': 'ProfilePage',
+          'url': pageUrl,
+          'name': `Krina Khunt | Full Stack Developer & AI Specialist`,
+          'description': defaultDesc,
+          'mainEntity': {
+            '@type': 'Person',
+            'name': 'Krina Khunt',
+            'alternateName': 'Krina',
+            'jobTitle': 'Full Stack Developer',
+            'url': 'https://krinakhunt.in',
+            'image': 'https://krinakhunt.in/girl.png',
+            'sameAs': [
+              'https://github.com/krinakhunt12',
+              'https://www.linkedin.com/in/krinakhunt'
+            ],
+            'knowsAbout': ['React.js', 'TypeScript', 'Node.js', 'Python', 'TensorFlow', 'Keras', 'OpenCV', 'FastAPI', 'Plant Disease Detection', 'Smart Agriculture AI'],
+            'worksFor': {
+              '@type': 'Organization',
+              'name': 'Freelance'
+            },
+            'address': {
+              '@type': 'PostalAddress',
+              'addressCountry': 'IN'
+            }
+          }
+        };
+      } else if (schemaType === 'projects') {
+        const projectItems = PROJECTS.map((proj, index) => ({
+          '@type': 'ListItem',
+          'position': index + 1,
+          'item': {
+            '@type': 'CreativeWork',
+            'name': proj.title,
+            'description': proj.description,
+            'image': proj.image.startsWith('.') ? `https://krinakhunt.in${proj.image.substring(1)}` : proj.image,
+            'url': proj.liveUrl,
+            'genre': proj.category,
+            'creator': {
+              '@type': 'Person',
+              'name': 'Krina Khunt'
+            }
+          }
+        }));
+
+        ldData = {
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          'url': pageUrl,
+          'name': `${title} | Krina Khunt`,
+          'description': defaultDesc,
+          'mainEntity': {
+            '@type': 'ItemList',
+            'numberOfItems': PROJECTS.length,
+            'itemListElement': projectItems
+          }
+        };
+      } else if (schemaType === 'about') {
+        ldData = {
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          'url': pageUrl,
+          'name': `${title} | Krina Khunt`,
+          'description': defaultDesc,
+          'mainEntity': {
+            '@type': 'Person',
+            'name': 'Krina Khunt',
+            'description': 'Full Stack Software Engineer blending logic and high-fidelity design to build premium web applications and plant disease AI detection suites.'
+          }
+        };
+      } else if (schemaType === 'contact') {
+        ldData = {
+          '@context': 'https://schema.org',
+          '@type': 'ContactPage',
+          'url': pageUrl,
+          'name': `${title} | Krina Khunt`,
+          'description': defaultDesc,
+          'mainEntity': {
+            '@type': 'Person',
+            'name': 'Krina Khunt',
+            'email': 'krinakhunt12@gmail.com',
+            'contactPoint': {
+              '@type': 'ContactPoint',
+              'contactType': 'professional inquiry',
+              'email': 'krinakhunt12@gmail.com',
+              'url': 'https://krinakhunt.in/contact'
+            }
+          }
+        };
+      } else {
+        // Default WebPage
+        ldData = {
+          '@context': 'https://schema.org',
+          '@type': 'WebPage',
+          'url': pageUrl,
+          'name': `${title} | Krina Khunt`,
+          'description': defaultDesc,
+          'author': {
+            '@type': 'Person',
+            'name': 'Krina Khunt',
+            'url': 'https://krinakhunt.in/'
+          }
+        };
+      }
 
       if (!ld) {
         ld = document.createElement('script');
@@ -107,7 +207,7 @@ const SEO: React.FC<SEOProps> = ({ title, description, keywords, image, url }) =
       // fail silently
     }
 
-  }, [title, description, keywords, image, url]);
+  }, [title, description, keywords, image, url, schemaType]);
 
   return null;
 };

@@ -34,7 +34,12 @@ const Home: React.FC = () => {
 
   return (
     <main className="relative overflow-hidden">
-      <SEO title="Full Stack Developer & AI Enthusiast" />
+      <SEO 
+        title="Full Stack Developer & AI Specialist" 
+        description="Welcome to Krina Khunt's official portfolio. Premium Full Stack Developer & AI Specialist crafting high-performance web solutions, e-commerce suites, and plant disease detection AI systems like LeafGuard." 
+        keywords="Krina Khunt, Krina, Full Stack Developer, AI Specialist, LeafGuard, Plant Disease Detection AI, Smart Farming, Agricultural AI, Web Developer Portfolio, React Developer, FastAPI, India"
+        schemaType="profile"
+      />
       {/* Background blobs */}
       <div className="absolute top-[12%] -right-24 w-96 h-96 rounded-full blur-[120px] -z-10 animate-pulse" style={{ backgroundColor: 'var(--accent-1)', opacity: 0.03 }} />
       <div className="absolute top-[45%] -left-24 w-[500px] h-[500px] rounded-full blur-[150px] -z-10" style={{ backgroundColor: 'var(--accent-1)', opacity: 0.025 }} />

@@ -8,7 +8,12 @@ const About: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <main className="relative pt-20">
-      <SEO title="My Story" description="Learn more about Krina Khunt's journey as a software engineer, her core values, and her commitment to building logic-driven, aesthetic web solutions." />
+      <SEO 
+        title="My Story" 
+        description="Discover Krina Khunt's background as a Full Stack Software Engineer. Blending logical precision, high-performance clean-code design, and smart agricultural AI integrations." 
+        keywords="Krina Khunt biography, Krina Khunt developer, Full Stack Engineer background, software architecture, LeafGuard creator, smart farming AI engineer"
+        schemaType="about"
+      />
       <div className="py-12 md:py-20 px-6">
         <div className="container max-w-6xl mx-auto px-2 md:px-6">
           <div className="flex items-center gap-3 mb-2 animate-in fade-in slide-in-from-bottom-4 duration-700">

@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { Skill } from '../types';
 import { SKILLS } from '../constants';
+import { useTheme } from '../hooks/useTheme';
 
-const SkillBar: React.FC<{ skill: Skill; delay: number }> = ({ skill, delay }) => {
+const SkillBar: React.FC<{ skill: Skill; delay: number; isLight: boolean }> = ({ skill, delay, isLight }) => {
   const [animated, setAnimated] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -14,27 +15,32 @@ const SkillBar: React.FC<{ skill: Skill; delay: number }> = ({ skill, delay }) =
     return () => observer.disconnect();
   }, []);
 
+  const bgNormal = isLight ? 'rgba(0, 0, 0, 0.02)' : 'rgba(255, 255, 255, 0.03)';
+  const bgHover = isLight ? 'rgba(0, 0, 0, 0.05)' : 'rgba(255, 255, 255, 0.07)';
+  const borderNormal = isLight ? 'rgba(0, 0, 0, 0.06)' : 'rgba(255, 255, 255, 0.06)';
+  const borderHover = isLight ? 'rgba(0, 0, 0, 0.12)' : 'rgba(255, 255, 255, 0.15)';
+
   return (
     <div ref={ref} className="p-4 md:p-5 rounded-xl border group relative overflow-hidden"
-      style={{ backgroundColor: 'rgba(255,255,255,0.03)', borderColor: 'rgba(255,255,255,0.06)', transition: 'transform 0.25s, background-color 0.25s, border-color 0.25s' }}
-      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255,255,255,0.07)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.15)'; }}
-      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255,255,255,0.03)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.06)'; }}
+      style={{ backgroundColor: bgNormal, borderColor: borderNormal, transition: 'transform 0.25s, background-color 0.25s, border-color 0.25s' }}
+      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.backgroundColor = bgHover; (e.currentTarget as HTMLElement).style.borderColor = borderHover; }}
+      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.backgroundColor = bgNormal; (e.currentTarget as HTMLElement).style.borderColor = borderNormal; }}
     >
       <div className="flex justify-between items-center mb-3">
         <span className="font-bold text-xs md:text-sm">{skill.name}</span>
         <span className="text-xs font-bold tabular-nums" style={{ color: 'var(--accent-1)' }}>{skill.level}%</span>
       </div>
-      <div className="relative h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
+      <div className="relative h-1.5 w-full rounded-full overflow-hidden" style={{ backgroundColor: isLight ? 'rgba(0, 0, 0, 0.06)' : 'rgba(255, 255, 255, 0.08)' }}>
         <div className="absolute inset-y-0 left-0 rounded-full"
           style={{
             width: animated ? `${skill.level}%` : '0%',
             background: 'linear-gradient(90deg, var(--accent-1), var(--accent-2))',
-            boxShadow: '0 0 8px var(--accent-1)',
+            boxShadow: isLight ? 'none' : '0 0 8px var(--accent-1)',
             transition: `width 1200ms cubic-bezier(0.4,0,0.2,1) ${delay}ms`,
           }}
         />
         {/* Shimmer */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ width: `${skill.level}%`, background: 'linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent)', animation: 'shimmer 1.5s infinite' }} />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{ width: `${skill.level}%`, background: isLight ? 'linear-gradient(90deg,transparent,rgba(0,0,0,0.05),transparent)' : 'linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent)', animation: 'shimmer 1.5s infinite' }} />
       </div>
     </div>
   );
@@ -45,6 +51,8 @@ interface SkillsProps {
 }
 
 const Skills: React.FC<SkillsProps> = ({ hideHeader }) => {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const categories: Skill['category'][] = ['Frontend', 'Backend', 'Database', 'Tools & DevOps', 'Design'];
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
@@ -83,7 +91,7 @@ const Skills: React.FC<SkillsProps> = ({ hideHeader }) => {
                 className="p-6 md:p-10 rounded-2xl md:rounded-3xl border relative overflow-hidden"
                 style={{
                   backgroundColor: 'var(--bg-secondary)',
-                  borderColor: 'rgba(255,255,255,0.06)',
+                  borderColor: isLight ? 'var(--border)' : 'rgba(255,255,255,0.06)',
                   opacity: inView ? 1 : 0,
                   transform: inView ? 'translateY(0)' : 'translateY(40px)',
                   transition: `opacity 0.7s ease ${catIdx * 0.12}s, transform 0.7s ease ${catIdx * 0.12}s`,
@@ -96,7 +104,7 @@ const Skills: React.FC<SkillsProps> = ({ hideHeader }) => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {catSkills.map((skill: Skill, i: number) => (
-                    <SkillBar key={skill.name} skill={skill} delay={catIdx * 100 + i * 80} />
+                    <SkillBar key={skill.name} skill={skill} delay={catIdx * 100 + i * 80} isLight={isLight} />
                   ))}
                 </div>
                 <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-10 pointer-events-none" style={{ backgroundColor: 'var(--accent-1)' }} />

@@ -7,7 +7,12 @@ const Projects: React.FC = () => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <main className="relative pt-20 page-enter">
-      <SEO title="Portfolio Showcase" description="A collection of high-performance web applications, e-commerce solutions, and AI/ML projects built by Krina Khunt." />
+      <SEO 
+        title="Portfolio Showcase" 
+        description="Explore a collection of premium web applications, secure FastAPI suites, e-commerce platforms, and advanced agricultural AI projects designed by Krina Khunt." 
+        keywords="Krina Khunt portfolio, LeafGuard project, plant disease detection AI, Nova Converter, Aurelia Luxe, premium React e-commerce, AI/ML web portfolio, full stack project showcase"
+        schemaType="projects"
+      />
       <div className="py-8 md:py-12 px-6">
         <div className="container max-w-6xl mx-auto px-2 md:px-6">
           <div className="flex items-center gap-3 mb-2">
