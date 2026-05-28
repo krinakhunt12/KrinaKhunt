@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './hooks/useTheme';
 import Preloader from './components/Preloader';
 import Background from './components/Background';
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import About from './pages/About';
-import Skills from './pages/Skills';
-import Projects from './pages/Projects';
-import Contact from './pages/Contact';
-// import Chatbot from './components/Chatbot';
 import Footer from './components/Footer';
 import { Toaster } from 'react-hot-toast';
+
+// Code-split pages for performance / smaller initial bundle size
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Skills = lazy(() => import('./pages/Skills'));
+const Projects = lazy(() => import('./pages/Projects'));
+const Contact = lazy(() => import('./pages/Contact'));
 
 const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,22 +26,24 @@ const App: React.FC = () => {
   if (isLoading) return <Preloader />;
 
   return (
-    <ThemeProvider>
-      <Router>
-        <div className="relative min-h-[100dvh]" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-          <Background />
-          <Navbar />
+    <HelmetProvider>
+      <ThemeProvider>
+        <Router>
+          <div className="relative min-h-[100dvh]" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+            <Background />
+            <Navbar />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
+            <Suspense fallback={<Preloader />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/skills" element={<Skills />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
+            </Suspense>
 
-          {/* <Chatbot /> */}
-          <Footer />
+            <Footer />
           <Toaster
             position="bottom-right"
             toastOptions={{
@@ -63,6 +67,7 @@ const App: React.FC = () => {
         </div>
       </Router>
     </ThemeProvider>
+  </HelmetProvider>
   );
 };
 
