@@ -9,15 +9,17 @@ interface SEOProps {
   image?: string;
   url?: string;
   schemaType?: 'profile' | 'projects' | 'about' | 'contact' | 'webpage';
+  robots?: string;
 }
 
 const SEO: React.FC<SEOProps> = ({
   title,
   description = "Krina Khunt — Full Stack Developer and AI specialist. Building high-performance web applications with React, Node.js, and AI/ML.",
-  keywords = "Krina Khunt, Full Stack Developer, React, Node.js, AI, Machine Learning, Computer Vision, Web Developer, Portfolio, Freelance, India",
+  keywords = "Krina Khunt, Full Stack Developer, React, Node.js, AI, Machine Learning, Computer Vision, Web Developer, Portfolio, Freelance, India, LeafGuard, Agricultural AI, Smart Farming",
   image = "https://krinakhunt.in/og-image.png",
   url,
-  schemaType = 'webpage'
+  schemaType = 'webpage',
+  robots = "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
 }) => {
   const siteTitle = `${title} | Krina Khunt`;
   const canonicalUrl = url || (typeof window !== 'undefined' ? window.location.origin + window.location.pathname : 'https://krinakhunt.in');
@@ -30,6 +32,9 @@ const SEO: React.FC<SEOProps> = ({
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
         <link rel="canonical" href={canonicalUrl} />
+        <meta name="robots" content={robots} />
+        <meta name="googlebot" content={robots} />
+        <meta name="bingbot" content={robots} />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
