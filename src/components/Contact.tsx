@@ -51,10 +51,6 @@ const Contact: React.FC = () => {
           {/* Left */}
           <div className="flex flex-col space-y-8" style={{ opacity: inView ? 1 : 0, transform: inView ? 'translateX(0)' : 'translateX(-40px)', transition: 'opacity 0.8s ease, transform 0.8s ease' }}>
             <div className="space-y-3">
-              <h3 className="mono text-[10px] uppercase tracking-[0.4em] font-semibold" style={{ color: 'var(--accent-1)' }}>Get in Touch</h3>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-none">
-                LET'S <br /><span style={{ color: 'var(--accent-1)' }}>CONNECT</span>
-              </h2>
               <p className="text-sm md:text-base max-w-md opacity-60 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Where curiosity meets execution and ideas become real. Let's discuss your next big idea.
               </p>
