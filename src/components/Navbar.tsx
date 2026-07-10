@@ -23,6 +23,7 @@ const Navbar: React.FC = () => {
     { name: 'About', path: '/about' },
     { name: 'Skills', path: '/skills' },
     { name: 'Projects', path: '/projects' },
+    { name: 'Blogs', path: '/blogs' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -73,8 +74,8 @@ const Navbar: React.FC = () => {
               style={{ borderColor: 'var(--border)' }} aria-label="Menu">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 {isMobileMenuOpen
-                  ? <><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>
-                  : <><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></>
+                  ? <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></>
+                  : <><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></>
                 }
               </svg>
             </button>
@@ -94,7 +95,7 @@ const Navbar: React.FC = () => {
                 <span className="text-xs font-semibold tracking-[0.3em] opacity-50 uppercase leading-none mt-1 block" style={{ color: 'var(--text-secondary)' }}>Khunt</span>
               </div>
               <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 rounded-lg border" style={{ borderColor: 'var(--border)' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
               </button>
             </div>
             <nav className="flex-1 p-6 space-y-2">
@@ -107,7 +108,7 @@ const Navbar: React.FC = () => {
                     color: isActive(link.path) ? 'var(--bg-primary)' : 'var(--text-primary)',
                   }}>
                   <span className="text-xs font-bold uppercase tracking-[0.2em]">{link.name}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6" /></svg>
                 </Link>
               ))}
             </nav>

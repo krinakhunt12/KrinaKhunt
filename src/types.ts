@@ -16,3 +16,16 @@ export interface Skill {
   category: 'Frontend' | 'Backend' | 'Database' | 'Tools & DevOps' | 'Design';
   icon: string;
 }
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  description: string;
+  content: string; // Markdown or simple HTML sections
+  image: string;
+  date: string;
+  readTime: string;
+  category: 'Agriculture AI' | 'AI & ML' | 'Web Development';
+  tags: string[];
+}
+
